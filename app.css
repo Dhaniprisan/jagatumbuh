@@ -1,16 +1,21 @@
-/* JagaTumbuh — App screen design system (shared) */
+/* JagaTumbuh — App screen design system (shared)
+   Palette: green (primer/growth) + coral (aksen hangat/emosi) + gold (mikro) */
 :root {
-  --cream: #F2F7EE;
+  --cream: #F6F2EA;
   --surface: #FFFFFF;
-  --ink: #26332A;
-  --muted: #5C6A5F;
-  --line: #E0E9DD;
+  --ink: #2E2A26;
+  --muted: #6E655E;
+  --line: #EAE1D3;
   --green: #3E7A4F;
   --green-dark: #2F6140;
   --green-soft: #E3F0E2;
   --sage: #5E8C6E;
   --sage-soft: #E8F2E7;
+  --coral: #E5664A;
+  --coral-dark: #C74E32;
+  --coral-soft: #FBE9E2;
   --gold: #E9A83A;
+  --gold-soft: #FBF0D9;
   --radius: 18px;
   --radius-sm: 12px;
   --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -20,7 +25,7 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   font-family: var(--font);
-  background: #E6EDE1;
+  background: #EBE5DA;
   color: var(--ink);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -37,7 +42,7 @@ img { max-width: 100%; display: block; }
   margin: 0 auto;
   min-height: 100dvh;
   background: var(--cream);
-  box-shadow: 0 0 0 1px var(--line), 0 8px 40px rgba(38,51,42,.08);
+  box-shadow: 0 0 0 1px var(--line), 0 8px 40px rgba(46,42,38,.08);
 }
 
 /* ---------- Status bar ---------- */
@@ -62,8 +67,8 @@ img { max-width: 100%; display: block; }
 .app-header .back svg { width: 18px; height: 18px; }
 .app-header h1 { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
 .app-header .avatar {
-  width: 36px; height: 36px; border-radius: 50%; background: var(--green-soft);
-  color: var(--green-dark); display: grid; place-items: center; font-weight: 700; font-size: 14px;
+  width: 36px; height: 36px; border-radius: 50%; background: var(--coral-soft);
+  color: var(--coral-dark); display: grid; place-items: center; font-weight: 700; font-size: 14px;
 }
 
 /* child chip + date */
@@ -73,7 +78,7 @@ img { max-width: 100%; display: block; }
   background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
   padding: 8px 14px; font-size: 14px; font-weight: 600;
 }
-.chip .dot { width: 26px; height: 26px; border-radius: 50%; background: var(--green-soft); color: var(--green-dark); display: grid; place-items: center; font-weight: 700; font-size: 12px; }
+.chip .dot { width: 26px; height: 26px; border-radius: 50%; background: var(--coral-soft); color: var(--coral-dark); display: grid; place-items: center; font-weight: 700; font-size: 12px; }
 .date-nav { display: flex; align-items: center; gap: 4px; }
 .date-nav button {
   width: 30px; height: 30px; border-radius: 10px; border: 1px solid var(--line);
@@ -94,6 +99,8 @@ img { max-width: 100%; display: block; }
 .stat .ico { font-size: 20px; line-height: 1; }
 .stat .v { font-size: 14px; font-weight: 800; margin-top: 6px; }
 .stat .k { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.stat.mood { background: var(--coral-soft); border-color: transparent; }
+.stat.mood .v { color: var(--coral-dark); }
 
 /* section label */
 .section-label { display: flex; align-items: center; justify-content: space-between; margin: 4px 0 14px; }
@@ -128,20 +135,28 @@ img { max-width: 100%; display: block; }
   background: linear-gradient(135deg, #E3F0E2, #C7DFC8);
   display: grid; place-items: center; color: var(--green-dark); font-size: 13px; font-weight: 600;
 }
+.entry .card .photo.coral { background: linear-gradient(135deg, #FBE9E2, #F3D5C8); color: var(--coral-dark); }
 .entry .badge {
   display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 700;
   color: var(--green-dark); background: var(--green-soft); padding: 3px 10px; border-radius: 999px;
 }
+.entry .badge.coral { color: var(--coral-dark); background: var(--coral-soft); }
 
 /* ---------- Bottom nav ---------- */
 .bottom-nav {
   position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
   width: 100%; max-width: 430px; z-index: 30;
-  background: rgba(255,255,255,.92); backdrop-filter: blur(12px);
+  background: rgba(255,255,255,.94); backdrop-filter: blur(12px);
   border-top: 1px solid var(--line);
   display: grid; grid-template-columns: repeat(5, 1fr);
   padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
 }
-.nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--muted); font-size: 10.5px; font-weight: 600; padding: 4px 0; }
+.nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--muted); font-size: 10.5px; font-weight: 600; padding: 2px 0; }
+.nav-item .pill {
+  display: grid; place-items: center;
+  width: 48px; height: 30px; border-radius: 999px;
+  transition: background .2s ease;
+}
 .nav-item svg { width: 22px; height: 22px; }
-.nav-item.active { color: var(--green-dark); }
+.nav-item.active { color: var(--coral-dark); font-weight: 700; }
+.nav-item.active .pill { background: var(--coral-soft); }
