@@ -10,21 +10,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --cream: #FBF6EF;
+    --cream: #F2F7EE;
     --surface: #FFFFFF;
-    --ink: #2E2A26;
-    --muted: #6E655E;
-    --line: #ECE2D5;
-    --coral: #E5664A;
-    --coral-dark: #C74E32;
-    --coral-soft: #FBE9E2;
-    --sage: #5F8B6F;
-    --sage-soft: #E7F0E9;
+    --ink: #26332A;
+    --muted: #5C6A5F;
+    --line: #E0E9DD;
+    --coral: #3E7A4F;
+    --coral-dark: #2F6140;
+    --coral-soft: #E3F0E2;
+    --sage: #5E8C6E;
+    --sage-soft: #E8F2E7;
     --gold: #E9A83A;
     --radius: 18px;
     --radius-sm: 12px;
-    --shadow-sm: 0 1px 2px rgba(46,42,38,.05), 0 4px 16px rgba(46,42,38,.06);
-    --shadow-lg: 0 8px 40px rgba(46,42,38,.10);
+    --shadow-sm: 0 1px 2px rgba(38,51,42,.05), 0 4px 16px rgba(38,51,42,.06);
+    --shadow-lg: 0 8px 40px rgba(38,51,42,.10);
     --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
 
@@ -122,7 +122,7 @@
   .log .cell .v { font-size: 14px; font-weight: 700; margin-top: 2px; }
   .phone .photo {
     border-radius: var(--radius-sm); height: 110px; overflow: hidden; position: relative;
-    background: linear-gradient(135deg, #F6E7D8, #EFD3C0);
+    background: linear-gradient(135deg, #E3F0E2, #C7DFC8);
     display: grid; place-items: center; color: var(--coral-dark);
   }
   .phone .photo span { font-size: 26px; }
@@ -159,7 +159,7 @@
   .role .icon svg { width: 22px; height: 22px; }
   .role.ortu .icon { background: var(--coral-soft); color: var(--coral-dark); }
   .role.guru .icon { background: var(--sage-soft); color: var(--sage); }
-  .role.sekolah .icon { background: #F5ECDD; color: #B07D2E; }
+  .role.sekolah .icon { background: #E9F2E4; color: #5E8C6E; }
   .role h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
   .role p { font-size: 14px; color: var(--muted); }
   .role ul { list-style: none; margin-top: 16px; }
@@ -167,7 +167,7 @@
   .role li::before { content: ""; width: 16px; height: 16px; flex: none; margin-top: 3px; background: currentColor; opacity: .85; border-radius: 50%; -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>') center/contain no-repeat; mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>') center/contain no-repeat; }
   .role.ortu li { color: var(--coral-dark); }
   .role.guru li { color: var(--sage); }
-  .role.sekolah li { color: #8F6A24; }
+  .role.sekolah li { color: #4E7A5B; }
 
   /* features — alternating */
   .feature { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; padding: 40px 0; }
@@ -204,7 +204,7 @@
   /* pricing */
   .pricing { background: var(--ink); color: #F5EFE7; border-radius: 24px; padding: 56px 48px; }
   .pricing-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; }
-  .pricing .kicker { color: #F0B7A8; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .pricing .kicker { color: #B5D8B8; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
   .pricing h2 { font-size: clamp(26px, 3.4vw, 38px); font-weight: 800; letter-spacing: -0.02em; margin: 12px 0 14px; }
   .pricing p { color: #CFC6BB; font-size: 16px; }
   .price-box { background: var(--surface); color: var(--ink); border-radius: var(--radius); padding: 32px; }
