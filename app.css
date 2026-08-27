@@ -15,6 +15,7 @@
   --coral-dark: #C74E32;
   --coral-soft: #FBE9E2;
   --gold: #E9A83A;
+  --gold-dark: #A87A2A;
   --gold-soft: #FBF0D9;
   --radius: 18px;
   --radius-sm: 12px;
@@ -99,6 +100,12 @@ img { max-width: 100%; display: block; }
 .stat .ico { font-size: 20px; line-height: 1; }
 .stat .v { font-size: 14px; font-weight: 800; margin-top: 6px; }
 .stat .k { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.stat.makan { background: var(--gold-soft); border-color: transparent; }
+.stat.makan .v { color: var(--gold-dark); }
+.stat.tidur { background: #EDEBF7; border-color: transparent; }
+.stat.tidur .v { color: #5C5A8A; }
+.stat.toilet { background: #E3EFF7; border-color: transparent; }
+.stat.toilet .v { color: #3A7A9E; }
 .stat.mood { background: var(--coral-soft); border-color: transparent; }
 .stat.mood .v { color: var(--coral-dark); }
 
@@ -158,5 +165,5 @@ img { max-width: 100%; display: block; }
   transition: background .2s ease;
 }
 .nav-item svg { width: 22px; height: 22px; }
-.nav-item.active { color: var(--coral-dark); font-weight: 700; }
-.nav-item.active .pill { background: var(--coral-soft); }
+.nav-item.active { color: var(--green-dark); font-weight: 700; }
+.nav-item.active .pill { background: var(--green-soft); }
