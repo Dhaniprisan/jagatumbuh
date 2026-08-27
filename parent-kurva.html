@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Kurva Pertumbuhan — JagaTumbuh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="app.css" />
+<style>
+  .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 4px; margin-bottom: 18px; }
+  .tab { padding: 10px 4px; text-align: center; border-radius: 10px; font-size: 13px; font-weight: 600; color: var(--muted); }
+  .tab.active { background: var(--green); color: #fff; }
+
+  .big-stat {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;
+  }
+  .big-stat .label { font-size: 13px; color: var(--muted); }
+  .big-stat .value { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; }
+  .big-stat .value small { font-size: 15px; font-weight: 600; color: var(--muted); }
+  .big-stat .ok { text-align: right; }
+  .big-stat .ok .badge { display: inline-block; font-size: 12px; font-weight: 700; color: var(--green-dark); background: var(--green-soft); padding: 4px 12px; border-radius: 999px; }
+  .big-stat .ok .sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  .chart-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 14px 14px; margin-bottom: 16px; }
+  .chart-card .title { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+  .chart-card .sub { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+  .chart-svg { width: 100%; height: auto; display: block; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; font-size: 11.5px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .sw { width: 16px; height: 3px; border-radius: 2px; display: inline-block; }
+  .legend .sw.coral { background: var(--coral); }
+  .legend .sw.median { background: #9AA79C; }
+  .legend .sw.zone { background: var(--green-soft); height: 10px; width: 16px; }
+
+  .history { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 18px; }
+  .history .title { font-size: 15px; font-weight: 800; padding: 14px 0 6px; }
+  .hrow { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid var(--line); }
+  .hrow:last-child { border-bottom: none; }
+  .hrow .d { font-size: 14px; font-weight: 600; }
+  .hrow .d small { display: block; font-size: 11px; color: var(--muted); font-weight: 500; }
+  .hrow .val { text-align: right; }
+  .hrow .val b { font-size: 15px; }
+  .hrow .val small { display: block; font-size: 11px; color: var(--sage); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="statusbar">
+    <span>9:41</span>
+    <span class="icons">●●●</span>
+  </div>
+
+  <header class="app-header">
+    <div class="top">
+      <a class="back" href="index.html" aria-label="Kembali">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
+      <h1>Tumbuh Kembang</h1>
+      <span class="avatar">A</span>
+    </div>
+    <div class="chip-row">
+      <span class="chip"><span class="dot">A</span> Ara · 2 tahun</span>
+      <span class="chip">Perempuan</span>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <div class="tabs">
+      <span class="tab active">Berat Badan</span>
+      <span class="tab">Tinggi</span>
+      <span class="tab">Lingkar Kepala</span>
+    </div>
+
+    <div class="big-stat">
+      <div>
+        <div class="label">Berat badan</div>
+        <div class="value">11,8 <small>kg</small></div>
+      </div>
+      <div class="ok">
+        <span class="badge">Normal · P50</span>
+        <div class="sub">Diukur 27 Agu</div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="title">Berat badan vs usia</div>
+      <div class="sub">Kurva standar WHO (0–24 bulan)</div>
+      <svg viewBox="0 0 360 230" class="chart-svg" role="img" aria-label="Kurva berat badan Ara">
+        <!-- grid -->
+        <g stroke="#EAE1D3" stroke-width="1">
+          <line x1="40" y1="15" x2="335" y2="15"/>
+          <line x1="40" y1="57" x2="335" y2="57"/>
+          <line x1="40" y1="100" x2="335" y2="100"/>
+          <line x1="40" y1="143" x2="335" y2="143"/>
+          <line x1="40" y1="185" x2="335" y2="185"/>
+        </g>
+        <!-- Y labels -->
+        <g fill="#9AA79C" font-size="10" text-anchor="end">
+          <text x="32" y="18">16</text>
+          <text x="32" y="60">12</text>
+          <text x="32" y="103">8</text>
+          <text x="32" y="146">4</text>
+          <text x="32" y="188">0</text>
+        </g>
+        <text x="10" y="100" fill="#9AA79C" font-size="10" text-anchor="middle" transform="rotate(-90 10 100)">kg</text>
+        <!-- normal zone band P3-P97 -->
+        <polygon points="40,140 77,111 114,90 151,79 188,70 261,55 335,42 335,80 261,93 188,106 151,115 114,123 77,137 40,160" fill="#E3F0E2" opacity="0.55"/>
+        <!-- P50 median -->
+        <polyline points="40,151 77,123 114,107 151,98 188,90 261,77 335,63" fill="none" stroke="#9AA79C" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <!-- Ara -->
+        <polyline points="40,152 77,122 114,106 151,95 188,86 261,72 335,60" fill="none" stroke="#E5664A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <g fill="#E5664A" stroke="#fff" stroke-width="2">
+          <circle cx="40" cy="152" r="3.5"/><circle cx="77" cy="122" r="3.5"/><circle cx="114" cy="106" r="3.5"/>
+          <circle cx="151" cy="95" r="3.5"/><circle cx="188" cy="86" r="3.5"/><circle cx="261" cy="72" r="3.5"/>
+        </g>
+        <circle cx="335" cy="60" r="5" fill="#E5664A" stroke="#fff" stroke-width="2.5"/>
+        <!-- X labels -->
+        <g fill="#9AA79C" font-size="10" text-anchor="middle">
+          <text x="40" y="205">0</text>
+          <text x="114" y="205">6</text>
+          <text x="188" y="205">12</text>
+          <text x="261" y="205">18</text>
+          <text x="335" y="205">24</text>
+        </g>
+        <text x="188" y="222" fill="#9AA79C" font-size="10" text-anchor="middle">bulan</text>
+      </svg>
+      <div class="legend">
+        <span><span class="sw coral"></span> Ara</span>
+        <span><span class="sw median"></span> Median (P50)</span>
+        <span><span class="sw zone"></span> Zona normal (P3–P97)</span>
+      </div>
+    </div>
+
+    <div class="history">
+      <div class="title">Riwayat pengukuran</div>
+      <div class="hrow">
+        <div class="d">27 Agu 2026<small>diukur di sekolah</small></div>
+        <div class="val"><b>11,8 kg</b><small>P50 · Normal</small></div>
+      </div>
+      <div class="hrow">
+        <div class="d">20 Feb 2026<small>18 bulan</small></div>
+        <div class="val"><b>10,6 kg</b><small>P45 · Normal</small></div>
+      </div>
+      <div class="hrow">
+        <div class="d">20 Agu 2025<small>12 bulan</small></div>
+        <div class="val"><b>9,3 kg</b><small>P55 · Normal</small></div>
+      </div>
+      <div class="hrow">
+        <div class="d">20 Feb 2025<small>6 bulan</small></div>
+        <div class="val"><b>7,4 kg</b><small>P50 · Normal</small></div>
+      </div>
+    </div>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <a class="nav-item" href="#"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>Beranda</a>
+    <a class="nav-item" href="parent-daily-report.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11"/><path d="M9 12h11"/><path d="M9 18h11"/><path d="M4 6h.01"/><path d="M4 12h.01"/><path d="M4 18h.01"/></svg></span>Laporan</a>
+    <a class="nav-item" href="parent-galeri.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></span>Momen</a>
+    <a class="nav-item" href="#"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="3"/><path d="M2 10h20"/></svg></span>SPP</a>
+    <a class="nav-item" href="#"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H5l-2 2V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/></svg></span>Chat</a>
+  </nav>
+
+</div>
+</body>
+</html>
