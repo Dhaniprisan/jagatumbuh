@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Beranda — JagaTumbuh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="app.css" />
+<style>
+  .home-header { padding: 14px 20px 12px; display: flex; align-items: center; justify-content: space-between; }
+  .home-header .greet { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .home-header .date { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .home-header .right { display: flex; align-items: center; gap: 12px; }
+  .bell { position: relative; width: 40px; height: 40px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; font-size: 17px; }
+  .bell .dot { position: absolute; top: 8px; right: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--coral); border: 2px solid var(--surface); }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--coral-soft); color: var(--coral-dark); display: grid; place-items: center; font-weight: 700; font-size: 15px; }
+
+  .status-card {
+    background: linear-gradient(135deg, #fff, var(--green-soft));
+    border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  }
+  .status-card .row { display: flex; align-items: center; justify-content: space-between; }
+  .status-card .name { font-size: 16px; font-weight: 800; }
+  .status-card .badge { font-size: 12px; font-weight: 700; color: var(--green-dark); background: var(--surface); border: 1px solid var(--line); padding: 4px 12px; border-radius: 999px; }
+  .mini { display: flex; gap: 14px; margin-top: 14px; }
+  .mini .m { flex: 1; }
+  .mini .m .k { font-size: 11px; color: var(--muted); }
+  .mini .m .v { font-size: 15px; font-weight: 800; margin-top: 2px; }
+  .status-card .link { display: inline-flex; align-items: center; gap: 4px; margin-top: 14px; font-size: 13px; font-weight: 700; color: var(--green-dark); }
+
+  .banner {
+    display: flex; align-items: center; gap: 12px; background: var(--ink); color: #F5EFE7;
+    border-radius: var(--radius); padding: 16px; margin-bottom: 16px;
+  }
+  .banner .ico { font-size: 22px; }
+  .banner .b-txt { flex: 1; }
+  .banner .b-txt b { font-size: 14px; display: block; }
+  .banner .b-txt span { font-size: 12px; color: #CFC6BB; }
+  .banner .go { font-size: 13px; font-weight: 700; color: #FFD9CF; }
+
+  .qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
+  .qa {
+    display: flex; flex-direction: column; gap: 10px; padding: 16px;
+    border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface);
+  }
+  .qa .q-ico { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 20px; }
+  .qa .q-name { font-size: 14px; font-weight: 700; }
+  .qa .q-sub { font-size: 11.5px; color: var(--muted); }
+  .qa.laporan .q-ico { background: var(--green-soft); }
+  .qa.momen .q-ico { background: var(--coral-soft); }
+  .qa.tumbuh .q-ico { background: var(--sage-soft); }
+  .qa.spp .q-ico { background: var(--gold-soft); }
+
+  .sec { display: flex; align-items: center; justify-content: space-between; margin: 4px 0 12px; }
+  .sec h2 { font-size: 16px; font-weight: 800; }
+  .sec a { font-size: 12.5px; font-weight: 700; color: var(--green-dark); }
+
+  .momen-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; margin: 0 -20px 22px; padding-left: 20px; padding-right: 20px; }
+  .momen-scroll .mshot { flex: none; width: 110px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+  .mshot .thumb { height: 78px; display: grid; place-items: center; font-size: 26px; }
+  .mshot .cap { padding: 6px 9px; font-size: 11px; font-weight: 600; }
+  .g1 { background: linear-gradient(135deg, #E3F0E2, #C4DCC6); }
+  .g2 { background: linear-gradient(135deg, #FBE9E2, #F2CFC0); }
+  .g3 { background: linear-gradient(135deg, #E3EFF7, #C7DFEE); }
+  .g4 { background: linear-gradient(135deg, #FBF0D9, #F2DCAC); }
+  .g5 { background: linear-gradient(135deg, #EDEBF7, #D6CEEE); }
+
+  .pengumuman { display: flex; flex-direction: column; gap: 10px; }
+  .peng {
+    display: flex; gap: 12px; align-items: flex-start; background: var(--surface);
+    border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px;
+  }
+  .peng .p-ico { font-size: 18px; }
+  .peng .p-txt b { font-size: 13.5px; font-weight: 700; display: block; }
+  .peng .p-txt p { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+  .peng .p-txt .t { font-size: 11px; color: var(--sage); font-weight: 600; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="statusbar">
+    <span>9:41</span>
+    <span class="icons">●●●</span>
+  </div>
+
+  <header class="home-header">
+    <div>
+      <div class="greet">Halo, Bunda 👋</div>
+      <div class="date">Kamis, 27 Agustus 2026</div>
+    </div>
+    <div class="right">
+      <span class="bell">🔔<span class="dot"></span></span>
+      <span class="avatar">A</span>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <div class="status-card">
+      <div class="row">
+        <span class="name">Ara · 2 tahun</span>
+        <span class="badge">Di sekolah</span>
+      </div>
+      <div class="mini">
+        <div class="m"><div class="k">Makan</div><div class="v">3x ✓</div></div>
+        <div class="m"><div class="k">Tidur</div><div class="v">1,5 jam</div></div>
+        <div class="m"><div class="k">Mood</div><div class="v">Ceria 😊</div></div>
+      </div>
+      <a class="link" href="parent-daily-report.html">Lihat laporan lengkap →</a>
+    </div>
+
+    <a class="banner" href="parent-spp.html">
+      <span class="ico">💳</span>
+      <div class="b-txt">
+        <b>Tagihan Agustus belum dibayar</b>
+        <span>Rp 1.665.000 · jatuh tempo 10 Sep</span>
+      </div>
+      <span class="go">Bayar →</span>
+    </a>
+
+    <div class="qa-grid">
+      <a class="qa laporan" href="parent-daily-report.html">
+        <span class="q-ico">📋</span>
+        <div><div class="q-name">Laporan Harian</div><div class="q-sub">Makan · tidur · mood</div></div>
+      </a>
+      <a class="qa momen" href="parent-galeri.html">
+        <span class="q-ico">🖼️</span>
+        <div><div class="q-name">Galeri Momen</div><div class="q-sub">Foto & video</div></div>
+      </a>
+      <a class="qa tumbuh" href="parent-kurva.html">
+        <span class="q-ico">📈</span>
+        <div><div class="q-name">Tumbuh Kembang</div><div class="q-sub">Kurva WHO</div></div>
+      </a>
+      <a class="qa spp" href="parent-spp.html">
+        <span class="q-ico">💳</span>
+        <div><div class="q-name">Pembayaran SPP</div><div class="q-sub">Tagihan & riwayat</div></div>
+      </a>
+    </div>
+
+    <div class="sec">
+      <h2>Momen terbaru</h2>
+      <a href="parent-galeri.html">Lihat semua</a>
+    </div>
+    <div class="momen-scroll">
+      <div class="mshot"><div class="thumb g1">🧩</div><div class="cap">Bermain balok</div></div>
+      <div class="mshot"><div class="thumb g2">🎨</div><div class="cap">Melukis</div></div>
+      <div class="mshot"><div class="thumb g3">🛝</div><div class="cap">Perosotan</div></div>
+      <div class="mshot"><div class="thumb g4">🍽️</div><div class="cap">Makan siang</div></div>
+      <div class="mshot"><div class="thumb g5">📚</div><div class="cap">Dongeng</div></div>
+    </div>
+
+    <div class="sec">
+      <h2>Pengumuman</h2>
+    </div>
+    <div class="pengumuman">
+      <div class="peng">
+        <span class="p-ico">📢</span>
+        <div class="p-txt">
+          <b>Kegiatan outing ke taman kota</b>
+          <p>Jumat, 29 Agu · bawa topi & bekal. Mohon konfirmasi kehadiran sebelum Rabu.</p>
+          <span class="t">2 hari lalu</span>
+        </div>
+      </div>
+      <div class="peng">
+        <span class="p-ico">🩺</span>
+        <div class="p-txt">
+          <b>Jadwal skrining kesehatan</b>
+          <p>Pemeriksaan BB/TB & imunisasi lanjutan oleh klinik partner, minggu depan.</p>
+          <span class="t">4 hari lalu</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <a class="nav-item active" href="parent-beranda.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>Beranda</a>
+    <a class="nav-item" href="parent-daily-report.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11"/><path d="M9 12h11"/><path d="M9 18h11"/><path d="M4 6h.01"/><path d="M4 12h.01"/><path d="M4 18h.01"/></svg></span>Laporan</a>
+    <a class="nav-item" href="parent-galeri.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></span>Momen</a>
+    <a class="nav-item" href="parent-spp.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="3"/><path d="M2 10h20"/></svg></span>SPP</a>
+    <a class="nav-item" href="#"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H5l-2 2V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/></svg></span>Chat</a>
+  </nav>
+
+</div>
+</body>
+</html>
