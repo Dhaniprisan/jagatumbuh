@@ -27,7 +27,10 @@
   .info small { display: block; font-size: 11px; color: var(--muted); }
   .st { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
   .st.in { color: var(--green-dark); background: var(--green-soft); }
-  .st.out { color: var(--muted); background: var(--cream); }
+  .st.izin { color: var(--coral-dark); background: var(--coral-soft); }
+  .st.tidak { color: var(--muted); background: var(--cream); }
+  .badge-row { display:flex; gap:8px; align-items:center; }
+  .badge-row .st { margin-right:6px; }
   .go { font-size: 12px; font-weight: 700; color: var(--coral-dark); }
 </style>
 </head>
@@ -63,32 +66,32 @@
       <a class="child" href="guru-input.html">
         <span class="av c1">A</span>
         <div class="info"><b>Ara</b><small>2 tahun · sudah diinput</small></div>
-        <span class="st in">Di sekolah</span><span class="go">Catat →</span>
+        <div class="badge-row"><span class="st in">Hadir</span><span class="go">Catat →</span></div>
       </a>
       <a class="child" href="guru-input.html">
         <span class="av c2">B</span>
-        <div class="info"><b>Bima</b><small>2 tahun · belum diinput</small></div>
-        <span class="st in">Di sekolah</span><span class="go">Catat →</span>
+        <div class="info"><b>Bima</b><small>2 tahun · belum diinput</span></div>
+        <div class="badge-row"><span class="st in">Hadir</span><span class="go">Catat →</span></div>
       </a>
       <a class="child" href="guru-input.html">
         <span class="av c3">C</span>
-        <div class="info"><b>Caca</b><small>2,5 tahun · belum diinput</small></div>
-        <span class="st in">Di sekolah</span><span class="go">Catat →</span>
+        <div class="info"><b>Caca</b><small>2,5 tahun · belum diinput</span></div>
+        <div class="badge-row"><span class="st in">Hadir</span><span class="go">Catat →</span></div>
       </a>
       <a class="child" href="guru-input.html">
         <span class="av c4">D</span>
-        <div class="info"><b>Dara</b><small>2 tahun · belum diinput</small></div>
-        <span class="st in">Di sekolah</span><span class="go">Catat →</span>
+        <div class="info"><b>Dara</b><small>2 tahun · belum diinput</span></div>
+        <div class="badge-row"><span class="st in">Hadir</span><span class="go">Catat →</span></div>
       </a>
       <a class="child" href="guru-input.html">
         <span class="av c5">E</span>
-        <div class="info"><b>Elan</b><small>3 tahun · belum diinput</small></div>
-        <span class="st in">Di sekolah</span><span class="go">Catat →</span>
+        <div class="info"><b>Elan</b><small>3 tahun · belum diinput</span></div>
+        <div class="badge-row"><span class="st in">Hadir</span><span class="go">Catat →</span></div>
       </a>
       <a class="child" href="guru-input.html">
         <span class="av c6">F</span>
-        <div class="info"><b>Fara</b><small>2 tahun · izin</small></div>
-        <span class="st out">Izin</span><span class="go">Catat →</span>
+        <div class="info"><b>Fara</b><small>2 tahun · izin</span></div>
+        <div class="badge-row"><span class="st izin">Izin</span><span class="go">Catat →</span></div>
       </a>
     </div>
 
