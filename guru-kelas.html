@@ -29,8 +29,13 @@
   .st.in { color: var(--green-dark); background: var(--green-soft); }
   .st.izin { color: var(--coral-dark); background: var(--coral-soft); }
   .st.tidak { color: var(--muted); background: var(--cream); }
-  .badge-row { display:flex; gap:8px; align-items:center; }
-  .badge-row .st { margin-right:6px; }
+  .badge-row { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+  .badge-row .toggle-btn { font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; border:none; background:var(--line); color:var(--muted); cursor:pointer; transition:.15s; }
+  .badge-row .toggle-btn:hover { transform:translateY(-1px); box-shadow:0 2px 4px rgba(46,42,38,.08); }
+  .badge-row .st { cursor:default; pointer-events:none; }
+  .badge-row .toggle-btn.in { background:var(--green-soft); color:var(--green-dark); }
+  .badge-row .toggle-btn.izin { background:var(--coral-soft); color:var(--coral-dark); }
+  .badge-row .toggle-btn.tidak { background:var(--cream); color:var(--muted); }
   .go { font-size: 12px; font-weight: 700; color: var(--coral-dark); }
 </style>
 </head>
@@ -56,8 +61,8 @@
   <main class="content">
 
     <div class="att">
-      <div><div class="n">6/6</div><div class="l">anak hadir hari ini</div></div>
-      <span class="ok">Semua hadir</span>
+      <div><div class="n" id="att-count">6/6</div><div class="l">anak hadir hari ini</div></div>
+      <span class="ok">Tap untuk ubah status</span>
     </div>
 
     <div class="section-label"><h2>Daftar anak</h2><span class="meta">ketuk untuk catat aktivitas</span></div>
@@ -66,32 +71,32 @@
       <a class="child" href="guru-input.html">
         <span class="av c1">A</span>
         <div class="info"><b>Ara</b><small>2 tahun · sudah diinput</small></div>
-        <div class="badge-row"><span class="st in">Hadir</span><span class="go">Catat →</span></div>
+        <div class="badge-row"><button class="toggle-btn in" data-state="in" onclick="cycleAtt(this)">Hadir</button><a class="go" href="guru-input.html">Catat →</a></div>
       </a>
       <a class="child" href="guru-input.html">
         <span class="av c2">B</span>
         <div class="info"><b>Bima</b><small>2 tahun · belum diinput</span></div>
-        <div class="badge-row"><span class="st in">Hadir</span><span class="go">Catat →</span></div>
+        <div class="badge-row"><button class="toggle-btn in" data-state="in" onclick="cycleAtt(this)">Hadir</button><a class="go" href="guru-input.html">Catat →</a></div>
       </a>
       <a class="child" href="guru-input.html">
         <span class="av c3">C</span>
         <div class="info"><b>Caca</b><small>2,5 tahun · belum diinput</span></div>
-        <div class="badge-row"><span class="st in">Hadir</span><span class="go">Catat →</span></div>
+        <div class="badge-row"><button class="toggle-btn in" data-state="in" onclick="cycleAtt(this)">Hadir</button><a class="go" href="guru-input.html">Catat →</a></div>
       </a>
       <a class="child" href="guru-input.html">
         <span class="av c4">D</span>
         <div class="info"><b>Dara</b><small>2 tahun · belum diinput</span></div>
-        <div class="badge-row"><span class="st in">Hadir</span><span class="go">Catat →</span></div>
+        <div class="badge-row"><button class="toggle-btn in" data-state="in" onclick="cycleAtt(this)">Hadir</button><a class="go" href="guru-input.html">Catat →</a></div>
       </a>
       <a class="child" href="guru-input.html">
         <span class="av c5">E</span>
         <div class="info"><b>Elan</b><small>3 tahun · belum diinput</span></div>
-        <div class="badge-row"><span class="st in">Hadir</span><span class="go">Catat →</span></div>
+        <div class="badge-row"><button class="toggle-btn in" data-state="in" onclick="cycleAtt(this)">Hadir</button><a class="go" href="guru-input.html">Catat →</a></div>
       </a>
       <a class="child" href="guru-input.html">
         <span class="av c6">F</span>
         <div class="info"><b>Fara</b><small>2 tahun · izin</span></div>
-        <div class="badge-row"><span class="st izin">Izin</span><span class="go">Catat →</span></div>
+        <div class="badge-row"><button class="toggle-btn izin" data-state="izin" onclick="cycleAtt(this)">Izin</button><a class="go" href="guru-input.html">Catat →</a></div>
       </a>
     </div>
 
@@ -105,5 +110,6 @@
   </nav>
 
 </div>
+<script src="att.js"></script>
 </body>
 </html>
