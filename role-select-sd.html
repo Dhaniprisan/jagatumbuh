@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pilih Peran — JagaTumbuh SD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #F6F2EA; --ink: #2E2A26; --muted: #6E655E; --line: #EAE1D3;
+    --green: #3E7A4F; --green-dark: #2F6140; --green-soft: #E3F0E2;
+    --coral: #E5664A; --coral-dark: #C74E32; --coral-soft: #FBE9E2;
+    --gold: #E9A83A; --gold-soft: #FBF0D9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Plus Jakarta Sans", system-ui, sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+  .wrap { width: 100%; max-width: 560px; text-align: center; }
+  .logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 20px; margin-bottom: 8px; }
+  .logo .mark { width: 30px; height: 30px; background: var(--green); color: #fff; border-radius: 9px; display: grid; place-items: center; font-size: 15px; }
+  h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); margin: 8px 0 28px; }
+  .roles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .role { text-decoration: none; color: var(--ink); background: #fff; border: 1.5px solid var(--line); border-radius: 20px; padding: 28px 20px; text-align: left; transition: transform .18s ease, box-shadow .18s ease; }
+  .role:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(46,42,38,.10); }
+  .role .ico { width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center; font-size: 26px; margin-bottom: 14px; }
+  .role.parent .ico { background: var(--green-soft); }
+  .role.guru .ico { background: var(--coral-soft); }
+  .role b { display: block; font-size: 18px; font-weight: 800; }
+  .role span { display: block; font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+  .role .go { display: inline-block; margin-top: 14px; font-size: 13px; font-weight: 700; }
+  .role.parent .go { color: var(--green-dark); }
+  .role.guru .go { color: var(--muted); }
+  .role.disabled { opacity: .7; cursor: not-allowed; }
+  .role.disabled:hover { transform: none; box-shadow: none; }
+  .coming-soon { display: inline-block; margin-top: 14px; font-size: 12px; font-weight: 700; color: var(--muted); background: var(--gold-soft); padding: 4px 10px; border-radius: 999px; }
+  .back { display: inline-block; margin-top: 26px; font-size: 13px; color: var(--muted); text-decoration: none; }
+  @media (max-width: 520px) { .roles { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo"><span class="mark">🌱</span> JagaTumbuh</div>
+    <h1>Jelajahi Prototype SD</h1>
+    <p class="sub">Pilih peran untuk masuk ke aplikasi SD</p>
+    <div class="roles">
+      <a class="role parent" href="sd-ortu-beranda.html">
+        <span class="ico">👨‍👩‍👧</span>
+        <b>Orang Tua</b>
+        <span>Pantau jadwal, nilai, absensi & komunikasi sekolah anak.</span>
+        <span class="go">Masuk sebagai Orang Tua →</span>
+      </a>
+      <div class="role guru disabled" aria-label="Peran Guru segera hadir">
+        <span class="ico">🧑‍🏫</span>
+        <b>Guru</b>
+        <span>Kelola kelas, nilai, absensi siswa, dan komunikasi orang tua.</span>
+        <span class="coming-soon">Segera hadir</span>
+      </div>
+    </div>
+    <a class="back" href="produk-select.html">← Kembali ke pilihan produk</a>
+  </div>
+</body>
+</html>

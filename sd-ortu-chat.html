@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Pesan — JagaTumbuh SD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="app.css" />
+<style>
+  .chat-list { padding: 4px 20px 18px; }
+  .chat { display: flex; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+  .chat:last-child { border-bottom: 0; }
+  .chat .ava { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-size: 18px; font-weight: 700; flex: none; }
+  .chat .info { flex: 1; min-width: 0; }
+  .chat .info .name { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .chat .info .msg { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .chat .meta { text-align: right; }
+  .chat .meta .time { font-size: 11px; color: var(--muted); }
+  .chat .meta .unread { display: inline-block; min-width: 18px; height: 18px; border-radius: 999px; background: var(--coral); color: #fff; font-size: 10px; font-weight: 700; line-height: 18px; text-align: center; margin-top: 4px; }
+
+  .thread { display: none; flex-direction: column; height: calc(100dvh - 120px); }
+  .thread.show { display: flex; }
+  .messages { flex: 1; overflow-y: auto; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; }
+  .bubble { max-width: 80%; padding: 12px 14px; border-radius: 18px; font-size: 13px; line-height: 1.45; }
+  .bubble.in { align-self: flex-start; background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+  .bubble.out { align-self: flex-end; background: var(--green); color: #fff; border-bottom-right-radius: 4px; }
+  .bubble .time { font-size: 10px; opacity: .7; margin-top: 4px; display: block; }
+  .input-bar { display: flex; gap: 10px; padding: 12px 20px; border-top: 1px solid var(--line); background: var(--surface); }
+  .input-bar input { flex: 1; border: 1px solid var(--line); border-radius: 999px; padding: 10px 14px; font-family: inherit; font-size: 14px; }
+  .input-bar button { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--green); color: #fff; font-size: 18px; cursor: pointer; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="statusbar"><span>9:41</span><span class="icons">●●●</span></div>
+
+  <header class="app-header" id="listHeader">
+    <div class="top">
+      <a class="back" href="sd-ortu-beranda.html" aria-label="Kembali"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></a>
+      <h1>Pesan</h1>
+      <span class="avatar">R</span>
+    </div>
+  </header>
+
+  <header class="app-header hidden" id="threadHeader">
+    <div class="top">
+      <button class="back" onclick="showList()" aria-label="Kembali"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <h1 id="threadTitle">Wali Kelas</h1>
+      <span class="avatar" id="threadAva">B</span>
+    </div>
+  </header>
+
+  <main class="content" style="padding-top:8px;" id="listView">
+    <div class="chat-list">
+      <div class="chat" onclick="openThread('Bu Sari','Wali Kelas','🌸')">
+        <span class="ava" style="background:#FBE9E2;color:#C74E32;">🌸</span>
+        <div class="info"><div class="name">Wali Kelas</div><div class="msg">Ananda hari ini aktif di kelas 👍</div></div>
+        <div class="meta"><span class="time">08.30</span><span class="unread">2</span></div>
+      </div>
+      <div class="chat" onclick="openThread('Pak Budi','Guru Matematika','📐')">
+        <span class="ava" style="background:#E3EFF7;color:#3A7A9E;">📐</span>
+        <div class="info"><div class="name">Guru Matematika</div><div class="msg">Latihan pecahan hal. 45 sudah saya bagikan.</div></div>
+        <div class="meta"><span class="time">Kem</span></div>
+      </div>
+      <div class="chat" onclick="openThread('Bu Dewi','Guru IPA','🔬')">
+        <span class="ava" style="background:#E3F0E2;color:#2F6140;">🔬</span>
+        <div class="info"><div class="name">Guru IPA</div><div class="msg">Diorama ekosistem boleh dikumpulkan minggu depan.</div></div>
+        <div class="meta"><span class="time">Sen</span></div>
+      </div>
+      <div class="chat" onclick="openThread('Admin','Admin Sekolah','🏫')">
+        <span class="ava" style="background:#FBF0D9;color:#A87A2A;">🏫</span>
+        <div class="info"><div class="name">Admin Sekolah</div><div class="msg">Info pembayaran SPP semester ganjil telah dibuka.</div></div>
+        <div class="meta"><span class="time">29 Agu</span></div>
+      </div>
+    </div>
+  </main>
+
+  <div class="thread" id="threadView">
+    <div class="messages">
+      <div class="bubble in">Selamat pagi, Bu. Hari ini Raka masuk sekolah ya.<span class="time">07.12</span></div>
+      <div class="bubble out">Iya Bu, terima kasih informasinya.<span class="time">07.15</span></div>
+      <div class="bubble in">Ananda hari ini aktif di kelas 👍<span class="time">08.30</span></div>
+      <div class="bubble in">Jangan lupa besok ada PR Matematika deadline ya, Bu.<span class="time">08.31</span></div>
+    </div>
+    <div class="input-bar"><input type="text" placeholder="Tulis pesan..."><button onclick="alert('Pesan dikirim (mockup)')"></button></div>
+  </div>
+
+  <nav class="bottom-nav" id="bottomNav">
+    <a class="nav-item" href="sd-ortu-beranda.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>Beranda</a>
+    <a class="nav-item" href="sd-ortu-jadwal.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg></span>Jadwal</a>
+    <a class="nav-item" href="sd-ortu-nilai.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v6"/></svg></span>Nilai</a>
+    <a class="nav-item" href="sd-ortu-absensi.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><circle cx="12" cy="10" r="3"/><path d="M12 14a5 5 0 0 0-5 5h10a5 5 0 0 0-5-5z"/></svg></span>Absensi</a>
+    <a class="nav-item active" href="sd-ortu-chat.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H5l-2 2V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/></svg></span>Pesan</a>
+  </nav>
+
+</div>
+<script>
+function openThread(name, role, ava) {
+  document.getElementById('listHeader').classList.add('hidden');
+  document.getElementById('listView').classList.add('hidden');
+  document.getElementById('threadHeader').classList.remove('hidden');
+  document.getElementById('threadView').classList.add('show');
+  document.getElementById('threadTitle').textContent = role;
+  document.getElementById('threadAva').textContent = ava;
+  document.getElementById('bottomNav').style.display = 'none';
+}
+function showList() {
+  document.getElementById('listHeader').classList.remove('hidden');
+  document.getElementById('listView').classList.remove('hidden');
+  document.getElementById('threadHeader').classList.add('hidden');
+  document.getElementById('threadView').classList.remove('show');
+  document.getElementById('bottomNav').style.display = '';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Jadwal Pelajaran — JagaTumbuh SD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="app.css" />
+<style>
+  .day-pills { display: flex; gap: 8px; overflow-x: auto; padding: 4px 20px 12px; }
+  .day-pills .pill { flex: none; min-width: 70px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: 13px; font-weight: 600; text-align: center; cursor: pointer; }
+  .day-pills .pill.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+  .timeline { position: relative; padding-left: 56px; margin: 0 20px 22px; }
+  .timeline::before { content: ""; position: absolute; left: 22px; top: 6px; bottom: 6px; width: 2px; background: var(--line); border-radius: 2px; }
+  .entry { position: relative; padding-bottom: 16px; }
+  .entry:last-child { padding-bottom: 0; }
+  .entry .time { position: absolute; left: -56px; top: 2px; width: 48px; text-align: right; font-size: 12px; font-weight: 700; color: var(--sage); }
+  .entry .node { position: absolute; left: -44px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--green-soft); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--line); }
+  .entry.break .node { background: var(--gold-soft); }
+  .entry.past { opacity: .55; }
+  .entry.now .node { background: var(--green); box-shadow: 0 0 0 3px var(--green-soft); }
+  .entry .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px; }
+  .entry.now .card { border-color: var(--green); }
+  .entry .card .head { display: flex; align-items: center; justify-content: space-between; }
+  .entry .card .head b { font-size: 14px; font-weight: 700; }
+  .entry .card .head .badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--green-soft); color: var(--green-dark); }
+  .entry .card p { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+
+  .section-label { padding: 4px 20px 14px; }
+  .section-label h2 { font-size: 16px; font-weight: 800; }
+  .pr-list { display: flex; flex-direction: column; gap: 10px; padding: 0 20px 22px; }
+  .pr-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px; display: flex; gap: 12px; align-items: flex-start; }
+  .pr-card .ico { font-size: 22px; width: 42px; height: 42px; border-radius: 12px; background: var(--gold-soft); display: grid; place-items: center; }
+  .pr-card .txt { flex: 1; }
+  .pr-card .txt b { font-size: 14px; font-weight: 700; display: block; }
+  .pr-card .txt p { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+  .pr-card .txt .meta { font-size: 11px; font-weight: 700; color: var(--coral-dark); margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="statusbar"><span>9:41</span><span class="icons">●●●</span></div>
+
+  <header class="app-header">
+    <div class="top">
+      <a class="back" href="sd-ortu-beranda.html" aria-label="Kembali"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></a>
+      <h1>Jadwal Pelajaran</h1>
+      <span class="avatar">R</span>
+    </div>
+    <div class="chip-row" style="margin-top:8px;">
+      <span class="chip"><span class="dot">R</span> Raka · Kelas 4A</span>
+    </div>
+  </header>
+
+  <main class="content" style="padding-top:12px;">
+
+    <div class="day-pills">
+      <span class="pill active">Senin</span>
+      <span class="pill">Selasa</span>
+      <span class="pill">Rabu</span>
+      <span class="pill">Kamis</span>
+      <span class="pill">Jumat</span>
+    </div>
+
+    <div class="timeline">
+      <div class="entry past">
+        <div class="time">07.00</div><div class="node"></div>
+        <div class="card"><div class="head"><b>Matematika</b><span class="badge">Kelas</span></div><p>Pecahan sederhana &amp; operasi dasar</p></div>
+      </div>
+      <div class="entry past">
+        <div class="time">08.40</div><div class="node"></div>
+        <div class="card"><div class="head"><b>Bahasa Indonesia</b><span class="badge">Kelas</span></div><p>Membaca pemahaman &amp; menulis ringkasan</p></div>
+      </div>
+      <div class="entry break">
+        <div class="time">09.20</div><div class="node"></div>
+        <div class="card"><div class="head"><b>Istirahat</b><span class="badge" style="background:var(--gold-soft);color:var(--gold-dark);">Umum</span></div><p>Istirahat &amp; makan ringan</p></div>
+      </div>
+      <div class="entry now">
+        <div class="time">09.50</div><div class="node"></div>
+        <div class="card"><div class="head"><b>Ilmu Pengetahuan Alam</b><span class="badge">Sekarang</span></div><p>Ekosistem &amp; rantai makanan</p></div>
+      </div>
+      <div class="entry">
+        <div class="time">10.30</div><div class="node"></div>
+        <div class="card"><div class="head"><b>Bahasa Inggris</b><span class="badge">Kelas</span></div><p>Daily activities &amp; vocabulary</p></div>
+      </div>
+      <div class="entry">
+        <div class="time">11.10</div><div class="node"></div>
+        <div class="card"><div class="head"><b>Pendidikan Agama</b><span class="badge">Kelas</span></div><p>Membaca &amp; menulis surat pendek</p></div>
+      </div>
+      <div class="entry break">
+        <div class="time">12.00</div><div class="node"></div>
+        <div class="card"><div class="head"><b>Istirahat</b><span class="badge" style="background:var(--gold-soft);color:var(--gold-dark);">Umum</span></div><p>Makan siang &amp; istirahat</p></div>
+      </div>
+      <div class="entry">
+        <div class="time">12.50</div><div class="node"></div>
+        <div class="card"><div class="head"><b>Seni Budaya</b><span class="badge">Kelas</span></div><p>Melukis &amp; kerajinan tangan</p></div>
+      </div>
+    </div>
+
+    <div class="section-label"><h2>PR & Tugas</h2></div>
+    <div class="pr-list">
+      <div class="pr-card"><span class="ico">📐</span><div class="txt"><b>Matematika</b><p>Latihan pecahan hal. 45</p><span class="meta">Deadline: Jumat, 5 Sep</span></div></div>
+      <div class="pr-card"><span class="ico">🔬</span><div class="txt"><b>IPA</b><p>Membuat diorama ekosistem sederhana</p><span class="meta">Deadline: Senin depan</span></div></div>
+      <div class="pr-card"><span class="ico">📖</span><div class="txt"><b>Bahasa Indonesia</b><p>Menulis ringkasan cerita 2 paragraf</p><span class="meta">Deadline: Kamis, 4 Sep</span></div></div>
+    </div>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <a class="nav-item" href="sd-ortu-beranda.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>Beranda</a>
+    <a class="nav-item active" href="sd-ortu-jadwal.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg></span>Jadwal</a>
+    <a class="nav-item" href="sd-ortu-nilai.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v6"/></svg></span>Nilai</a>
+    <a class="nav-item" href="sd-ortu-absensi.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><circle cx="12" cy="10" r="3"/><path d="M12 14a5 5 0 0 0-5 5h10a5 5 0 0 0-5-5z"/></svg></span>Absensi</a>
+    <a class="nav-item" href="sd-ortu-chat.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H5l-2 2V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/></svg></span>Pesan</a>
+  </nav>
+
+</div>
+</body>
+</html>

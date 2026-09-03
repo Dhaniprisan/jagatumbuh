@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Kehadiran & Izin — JagaTumbuh SD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="app.css" />
+<style>
+  .summary { display: flex; gap: 10px; padding: 4px 20px 18px; }
+  .summary .card { flex: 1; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 4px; text-align: center; }
+  .summary .card .v { font-size: 18px; font-weight: 800; }
+  .summary .card .k { font-size: 10px; color: var(--muted); }
+  .summary .card:nth-child(1) .v { color: var(--green-dark); }
+  .summary .card:nth-child(2) .v { color: var(--gold-dark); }
+  .summary .card:nth-child(3) .v { color: var(--coral-dark); }
+  .summary .card:nth-child(4) .v { color: var(--muted); }
+
+  .section-label { padding: 4px 20px 14px; display: flex; align-items: center; justify-content: space-between; }
+  .section-label h2 { font-size: 16px; font-weight: 800; }
+  .section-label .sub { font-size: 12px; color: var(--muted); }
+
+  .calendar { padding: 0 20px 18px; }
+  .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .cal-head b { font-size: 15px; font-weight: 800; }
+  .cal-head span { font-size: 12px; color: var(--muted); }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; }
+  .cal-grid .dow { font-size: 11px; font-weight: 700; color: var(--muted); padding: 6px 0; }
+  .cal-grid .day { aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; font-size: 12px; font-weight: 600; background: var(--surface); border: 1px solid var(--line); }
+  .cal-grid .day.hadir { border-color: var(--green); color: var(--green-dark); background: var(--green-soft); }
+  .cal-grid .day.izin { border-color: var(--gold); color: var(--gold-dark); background: var(--gold-soft); }
+  .cal-grid .day.sakit { border-color: var(--coral); color: var(--coral-dark); background: var(--coral-soft); }
+  .cal-grid .day.today { box-shadow: 0 0 0 2px var(--ink); }
+  .cal-grid .day.empty { background: transparent; border-color: transparent; }
+
+  .history { padding: 0 20px 18px; display: flex; flex-direction: column; gap: 10px; }
+  .history .row { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; }
+  .history .row .date { font-size: 13px; font-weight: 700; min-width: 70px; }
+  .history .row .badge { font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 999px; }
+  .history .row .badge.hadir { background: var(--green-soft); color: var(--green-dark); }
+  .history .row .badge.izin { background: var(--gold-soft); color: var(--gold-dark); }
+  .history .row .badge.sakit { background: var(--coral-soft); color: var(--coral-dark); }
+  .history .row .time { margin-left: auto; font-size: 12px; color: var(--muted); }
+
+  .btn { display: block; margin: 0 20px 12px; text-align: center; background: var(--green); color: #fff; font-weight: 700; padding: 14px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-size: 14px; }
+  .form-box { display: none; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; margin: 0 20px 18px; }
+  .form-box.show { display: block; }
+  .form-box label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 6px; margin-top: 12px; }
+  .form-box label:first-child { margin-top: 0; }
+  .form-box select, .form-box input, .form-box textarea { width: 100%; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); font-family: inherit; font-size: 14px; }
+  .form-box textarea { min-height: 80px; resize: vertical; }
+  .form-box .upload { border: 2px dashed var(--line); border-radius: 12px; padding: 24px; text-align: center; color: var(--muted); font-size: 13px; cursor: pointer; margin-top: 12px; }
+  .form-box .btns { display: flex; gap: 10px; margin-top: 14px; }
+  .form-box .btns button { flex: 1; padding: 12px; border-radius: 12px; border: none; font-family: inherit; font-weight: 700; cursor: pointer; }
+  .form-box .btns .cancel { background: var(--line); color: var(--ink); }
+  .form-box .btns .submit { background: var(--green); color: #fff; }
+
+  .toast { display: none; position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 999px; font-size: 13px; font-weight: 600; z-index: 50; box-shadow: 0 6px 20px rgba(0,0,0,.15); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="statusbar"><span>9:41</span><span class="icons">●●●</span></div>
+
+  <header class="app-header">
+    <div class="top">
+      <a class="back" href="sd-ortu-beranda.html" aria-label="Kembali"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></a>
+      <h1>Kehadiran & Izin</h1>
+      <span class="avatar">R</span>
+    </div>
+    <div class="chip-row" style="margin-top:8px;">
+      <span class="chip"><span class="dot">R</span> Raka · Kelas 4A</span>
+    </div>
+  </header>
+
+  <main class="content" style="padding-top:12px;">
+
+    <div class="summary">
+      <div class="card"><div class="v">18</div><div class="k">Hadir</div></div>
+      <div class="card"><div class="v">2</div><div class="k">Izin</div></div>
+      <div class="card"><div class="v">1</div><div class="k">Sakit</div></div>
+      <div class="card"><div class="v">0</div><div class="k">Alpha</div></div>
+    </div>
+
+    <div class="calendar">
+      <div class="cal-head"><b>September 2026</b><span>Hari ini: 3</span></div>
+      <div class="cal-grid">
+        <span class="dow">Min</span><span class="dow">Sen</span><span class="dow">Sel</span><span class="dow">Rab</span><span class="dow">Kam</span><span class="dow">Jum</span><span class="dow">Sab</span>
+        <span class="day empty"></span><span class="day empty"></span><span class="day empty"></span><span class="day sakit">1</span><span class="day hadir">2</span><span class="day hadir today">3</span><span class="day empty"></span>
+        <span class="day empty"></span><span class="day hadir">4</span><span class="day izin">5</span><span class="day empty"></span><span class="day empty"></span><span class="day empty"></span><span class="day empty"></span>
+      </div>
+    </div>
+
+    <div class="section-label"><h2>Riwayat Kehadiran</h2><span class="sub">Bulan ini</span></div>
+    <div class="history">
+      <div class="row"><span class="date">3 Sep</span><span class="badge hadir">Hadir</span><span class="time">06.55</span></div>
+      <div class="row"><span class="date">2 Sep</span><span class="badge sakit">Sakit</span><span class="time">-</span></div>
+      <div class="row"><span class="date">29 Agu</span><span class="badge hadir">Hadir</span><span class="time">06.58</span></div>
+      <div class="row"><span class="date">28 Agu</span><span class="badge izin">Izin</span><span class="time">-</span></div>
+    </div>
+
+    <button class="btn" id="btnAjukan" onclick="toggleForm()">+ Ajukan Izin</button>
+
+    <div class="form-box" id="formIzin">
+      <label>Jenis izin</label>
+      <select><option>Sakit</option><option>Izin kepentingan</option></select>
+      <label>Tanggal</label>
+      <input type="date" value="2026-09-05" />
+      <label>Alasan</label>
+      <textarea placeholder="Tulis alasan izin..."></textarea>
+      <div class="upload">📎 Upload surat keterangan</div>
+      <div class="btns">
+        <button class="cancel" onclick="toggleForm()">Batal</button>
+        <button class="submit" onclick="kirimIzin()">Kirim</button>
+      </div>
+    </div>
+
+  </main>
+
+  <div class="toast" id="toast">Pengajuan terkirim ke wali kelas ✓</div>
+
+  <nav class="bottom-nav">
+    <a class="nav-item" href="sd-ortu-beranda.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>Beranda</a>
+    <a class="nav-item" href="sd-ortu-jadwal.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg></span>Jadwal</a>
+    <a class="nav-item" href="sd-ortu-nilai.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v6"/></svg></span>Nilai</a>
+    <a class="nav-item active" href="sd-ortu-absensi.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><circle cx="12" cy="10" r="3"/><path d="M12 14a5 5 0 0 0-5 5h10a5 5 0 0 0-5-5z"/></svg></span>Absensi</a>
+    <a class="nav-item" href="sd-ortu-chat.html"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H5l-2 2V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/></svg></span>Pesan</a>
+  </nav>
+
+</div>
+<script>
+function toggleForm() { document.getElementById('formIzin').classList.toggle('show'); }
+function kirimIzin() {
+  document.getElementById('formIzin').classList.remove('show');
+  document.getElementById('btnAjukan').textContent = ' Menunggu konfirmasi';
+  const t = document.getElementById('toast');
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2500);
+}
+</script>
+</body>
+</html>

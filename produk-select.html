@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pilih Jenjang — JagaTumbuh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #F6F2EA; --ink: #2E2A26; --muted: #6E655E; --line: #EAE1D3;
+    --green: #3E7A4F; --green-dark: #2F6140; --green-soft: #E3F0E2;
+    --coral: #E5664A; --coral-dark: #C74E32; --coral-soft: #FBE9E2;
+    --gold: #E9A83A; --gold-dark: #A87A2A; --gold-soft: #FBF0D9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Plus Jakarta Sans", system-ui, sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+  .wrap { width: 100%; max-width: 620px; text-align: center; }
+  .logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 20px; margin-bottom: 8px; }
+  .logo .mark { width: 30px; height: 30px; background: var(--green); color: #fff; border-radius: 9px; display: grid; place-items: center; font-size: 15px; }
+  h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); margin: 8px 0 28px; }
+  .products { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .product { text-decoration: none; color: var(--ink); background: #fff; border: 1.5px solid var(--line); border-radius: 20px; padding: 24px 22px; text-align: left; display: flex; gap: 16px; align-items: center; transition: transform .18s ease, box-shadow .18s ease; }
+  .product:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(46,42,38,.10); border-color: var(--green); }
+  .product .ico { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-size: 28px; flex-shrink: 0; }
+  .product.daycare .ico { background: var(--green-soft); }
+  .product.sd .ico { background: var(--coral-soft); }
+  .product .info { flex: 1; }
+  .product b { display: block; font-size: 18px; font-weight: 800; }
+  .product .age { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 999px; margin: 6px 0 4px; }
+  .product.daycare .age { background: var(--green-soft); color: var(--green-dark); }
+  .product.sd .age { background: var(--coral-soft); color: var(--coral-dark); }
+  .product p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .product .go { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--green-dark); }
+  .back { display: inline-block; margin-top: 26px; font-size: 13px; color: var(--muted); text-decoration: none; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo"><span class="mark">🌱</span> JagaTumbuh</div>
+    <h1>Pilih Jenjang Sekolah</h1>
+    <p class="sub">Pilih jenjang untuk melihat prototype aplikasi</p>
+    <div class="products">
+      <a class="product daycare" href="role-select.html">
+        <span class="ico">🧸</span>
+        <div class="info">
+          <b>Daycare, KB &amp; TK</b>
+          <span class="age">Usia 0–6 tahun</span>
+          <p>Laporan harian (makan, tidur, toilet), galeri momen, kurva tumbuh kembang WHO, SPP.</p>
+          <span class="go">Lihat Prototype →</span>
+        </div>
+      </a>
+      <a class="product sd" href="role-select-sd.html">
+        <span class="ico">🎒</span>
+        <div class="info">
+          <b>Sekolah Dasar (SD)</b>
+          <span class="age">Usia 6–12 tahun</span>
+          <p>Jadwal pelajaran &amp; PR, laporan nilai, absensi, galeri kegiatan, komunikasi orang tua &amp; wali kelas.</p>
+          <span class="go">Lihat Prototype →</span>
+        </div>
+      </a>
+    </div>
+    <a class="back" href="index.html">← Kembali ke beranda situs</a>
+  </div>
+</body>
+</html>
