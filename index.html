@@ -35,6 +35,7 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+  html, body { overflow-x: clip; }
   body {
     font-family: var(--font);
     background: var(--cream);
@@ -209,12 +210,44 @@
   /* ---------- Section shared ---------- */
   section { padding: 80px 0; }
   .section-head { max-width: 640px; margin-bottom: 48px; }
+
+  /* Section background rhythm + soft dividers */
+  .section-green { background: #F0F5EF; }
+  .section-coral { background: #FBF1EC; }
+
+  .section-divider {
+    display: block; width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line), transparent);
+  }
+
+  /* Decorative blobs for middle sections */
+  .section-blob {
+    position: absolute; border-radius: 50%; pointer-events: none; z-index: 0;
+  }
+  .section-blob-green { background: radial-gradient(closest-side, rgba(62,122,79,.12), transparent); }
+  .section-blob-coral { background: radial-gradient(closest-side, rgba(229,102,74,.10), transparent); }
+  .section-blob-gold { background: radial-gradient(closest-side, rgba(233,168,58,.10), transparent); }
+
+  .problem .section-blob,
+  .testimonials .section-blob,
+  #cara-kerja .section-blob,
+  .vision .section-blob,
+  #harga .section-blob { width: 360px; height: 360px; }
+
+  .problem .section-blob { top: -120px; right: -100px; }
+  #cara-kerja .section-blob { bottom: -140px; left: -120px; }
+  .testimonials .section-blob { bottom: -160px; right: -120px; }
+  #harga .section-blob { top: -120px; right: -80px; }
+
+  .vision .vision-blob-big { width: 420px; height: 420px; }
+  .vision .vision-blob-left { top: -160px; left: -180px; }
+  .vision .vision-blob-right { bottom: -160px; right: -180px; }
   .section-head .kicker { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--coral); margin-bottom: 12px; }
   .section-head h2 { font-size: clamp(28px, 3.6vw, 40px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
   .section-head p { color: var(--muted); margin-top: 14px; font-size: 17px; }
 
   /* problem */
-  .problem { position: relative; background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; isolation: isolate; }
+  .problem { position: relative; background: #F0F5EF; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; isolation: isolate; }
   .problem::before {
     content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
     background-image: radial-gradient(circle, rgba(46,42,38,.05) 1.5px, transparent 1.5px);
@@ -223,7 +256,7 @@
   }
   .problem > .container { position: relative; z-index: 1; }
   .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .problem-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; background: var(--cream); text-align: center; transition: transform .2s ease, box-shadow .2s ease; }
+  .problem-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; background: var(--surface); text-align: center; transition: transform .2s ease, box-shadow .2s ease; }
   .problem-card:nth-child(1) { border-top: 3px solid var(--green); }
   .problem-card:nth-child(2) { border-top: 3px solid var(--coral); }
   .problem-card:nth-child(3) { border-top: 3px solid var(--gold); }
@@ -304,6 +337,9 @@
   .step p { font-size: 14px; color: var(--muted); }
 
   /* pricing */
+  #harga { position: relative; overflow: hidden; isolation: isolate; background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  #harga .container { position: relative; z-index: 1; }
+
   .pricing { position: relative; background: var(--ink); color: #F5EFE7; border-radius: 24px; padding: 56px 48px; border: 1.5px solid var(--line); transition: border-color .3s ease; }
   .pricing:hover { border-color: var(--green); }
   .pricing-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; }
@@ -415,8 +451,12 @@
   .proof-item:nth-child(3) .num::after { background: var(--gold); }
   .proof-item .label { font-size: 12px; color: var(--muted); margin-top: 8px; }
 
+  /* Steps section */
+  #cara-kerja { position: relative; overflow: hidden; isolation: isolate; background: #FBF1EC; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  #cara-kerja .container { position: relative; z-index: 1; }
+
   /* Vision alternate rows */
-  .vision { position: relative; text-align: center; padding: 56px 0; }
+  .vision { background: var(--cream); text-align: center; padding: 80px 0; overflow: hidden; isolation: isolate; }
   .vision .section-head { margin-left: auto; margin-right: auto; }
   .vision-row {
     position: relative;
@@ -465,7 +505,7 @@
   .admin-row:last-child { border-bottom: none; }
 
   /* Testimonials */
-  .testimonials { position: relative; background: var(--cream); border-top: 1px solid var(--line); overflow: hidden; isolation: isolate; }
+  .testimonials { position: relative; background: #F0F5EF; border-top: 1px solid var(--line); overflow: hidden; isolation: isolate; }
   .testimonials::before {
     content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
     background-image: radial-gradient(circle, rgba(46,42,38,.05) 1.5px, transparent 1.5px);
@@ -495,6 +535,9 @@
     .hero-blob-green,
     .hero-blob-coral,
     .hero-blob-gold { transform: scale(.7); }
+    .section-blob,
+    .vision-blob-big,
+    .vision-blob { transform: scale(.8); }
     .hero-grid, .problem-grid, .feature, .pricing-grid { grid-template-columns: 1fr; }
     .feature:nth-child(even) .feature-visual { order: 0; }
     .roles, .steps { grid-template-columns: 1fr; }
@@ -515,6 +558,9 @@
     .hero-blob-green,
     .hero-blob-coral,
     .hero-blob-gold { transform: scale(.6); }
+    .section-blob,
+    .vision-blob-big,
+    .vision-blob { transform: scale(.6); }
     .hero-sprinkle { display: none; }
     .hero-visual { min-height: auto; padding: 20px 0; }
     .hero-visual .phone { width: 260px; }
@@ -638,6 +684,7 @@
 
 <!-- PROBLEM -->
 <section class="problem" id="masalah">
+  <span class="section-blob section-blob-green" aria-hidden="true"></span>
   <div class="container">
     <div class="section-head">
       <div class="kicker">Kenapa JagaTumbuh</div>
@@ -789,6 +836,7 @@
 
 <!-- STEPS -->
 <section id="cara-kerja">
+  <span class="section-blob section-blob-coral" aria-hidden="true"></span>
   <div class="container">
     <div class="section-head">
       <div class="kicker">Cara Kerja</div>
@@ -816,6 +864,7 @@
 
 <!-- PRICING -->
 <section id="harga">
+  <span class="section-blob section-blob-gold" aria-hidden="true"></span>
   <div class="container">
     <div class="pricing">
       <div class="pricing-grid">
@@ -842,6 +891,8 @@
 
 <!-- VISION -->
 <section class="vision">
+  <span class="section-blob section-blob-gold vision-blob-big vision-blob-left" aria-hidden="true"></span>
+  <span class="section-blob section-blob-green vision-blob-big vision-blob-right" aria-hidden="true"></span>
   <div class="container">
     <div class="section-head">
       <div class="kicker">Perjalanan Kami</div>
@@ -895,6 +946,7 @@
 
 <!-- TESTIMONIALS -->
 <section class="testimonials">
+  <span class="section-blob section-blob-green" aria-hidden="true"></span>
   <div class="container">
     <div class="section-head">
       <h2>Kata mereka</h2>
