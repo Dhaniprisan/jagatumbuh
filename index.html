@@ -443,6 +443,9 @@
     display: flex; flex-direction: column; align-items: center;
   }
   .proof-item:first-child { border-left: none; }
+    .mini-graphic { height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+  .mini-graphic svg { display: block; }
+
   .proof-icon { font-size: 20px; line-height: 1; margin-bottom: 6px; }
   .proof-item .num { position: relative; display: inline-block; font-size: 26px; font-weight: 800; color: var(--green-dark); line-height: 1.2; padding-bottom: 4px; }
   .proof-item .num::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; border-radius: 999px; background: var(--line); }
@@ -664,17 +667,17 @@
   <div class="container">
     <div class="proof-grid">
       <div class="proof-item">
-        <span class="proof-icon">&#127979;</span>
+        <div class="mini-graphic"><svg width="96" height="40" viewBox="0 0 96 40" fill="none" aria-hidden="true"><rect x="4" y="24" width="14" height="14" rx="2" fill="#DCE9DC"/><rect x="28" y="18" width="14" height="20" rx="2" fill="#B9D2BA"/><rect x="52" y="10" width="14" height="28" rx="2" fill="#7FA982"/><rect x="76" y="2" width="14" height="36" rx="2" fill="#3E7A4F"/></svg></div>
         <div class="num">120+</div>
         <div class="label">Sekolah mitra</div>
       </div>
       <div class="proof-item">
-        <span class="proof-icon">&#128118;</span>
+        <div class="mini-graphic"><svg width="110" height="40" viewBox="0 0 110 40" fill="none" aria-hidden="true"><path d="M4 34 L26 28 L48 30 L70 16 L92 8 L104 4" stroke="#E5664A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="104" cy="4" r="3.5" fill="#E5664A"/></svg></div>
         <div class="num">3.500+</div>
         <div class="label">Anak terpantau</div>
       </div>
       <div class="proof-item">
-        <span class="proof-icon">&#128522;</span>
+        <div class="mini-graphic"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true"><circle cx="22" cy="22" r="18" stroke="#EAE1D3" stroke-width="5"/><circle cx="22" cy="22" r="18" stroke="#3E7A4F" stroke-width="5" stroke-linecap="round" stroke-dasharray="110.8 113" transform="rotate(-90 22 22)"/><text x="22" y="26" text-anchor="middle" font-size="10" font-weight="700" fill="#2E2A26" font-family="Plus Jakarta Sans, sans-serif">98%</text></svg></div>
         <div class="num">98%</div>
         <div class="label">Orang tua puas</div>
       </div>
@@ -693,7 +696,7 @@
     <div class="problem-grid">
       <div class="problem-card light">
         <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#E5664A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="8" width="24" height="44" rx="5"/><path d="M28 12h8" stroke-width="2"/><text x="32" y="40" text-anchor="middle" font-size="22" font-weight="700" fill="#E5664A" stroke="none" font-family="Plus Jakarta Sans, sans-serif">?</text><circle cx="50" cy="14" r="6" fill="#FBE9E2"/><path d="M50 11.5v.01" stroke-width="2.2"/><path d="M50 17v-2.5" stroke-width="2.2"/></svg>
         </div>
         <span class="tag">Untuk Orang Tua</span>
         <h3>Cemas, dan momen terlewat.</h3>
@@ -701,7 +704,7 @@
       </div>
       <div class="problem-card dark">
         <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#F0B7A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#F0B7A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 26a8 8 0 0 1 8-8h20a8 8 0 0 1 8 8v8a8 8 0 0 1-8 8H28l-8 8v-8h-2a8 8 0 0 1-8-8z"/><circle cx="26" cy="30" r="1.6" fill="#F0B7A8" stroke="none"/><circle cx="34" cy="30" r="1.6" fill="#F0B7A8" stroke="none"/><circle cx="42" cy="30" r="1.6" fill="#F0B7A8" stroke="none"/><path d="M12 12h18" stroke-dasharray="3 4"/><path d="M16 6h10" stroke-dasharray="3 4"/></svg>
         </div>
         <span class="tag">Untuk Sekolah</span>
         <h3>Beban yang berulang.</h3>
@@ -844,16 +847,19 @@
     </div>
     <div class="steps">
       <div class="step">
+        <div class="step-graphic"><svg width="120" height="52" viewBox="0 0 120 52" fill="none" stroke="#3E7A4F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 44V20l12-8 12 8v24"/><path d="M18 44h32"/><path d="M28 44v-8h12v8"/><circle cx="34" cy="30" r="1.8" fill="#3E7A4F" stroke="none"/><rect x="58" y="8" width="34" height="36" rx="4"/><path d="M64 18h22M64 26h22M64 34h14" stroke-width="2"/><path d="M62 17l2 2 3-4" stroke-width="2"/><path d="M62 25l2 2 3-4" stroke-width="2"/></svg></div>
         <div class="n">1</div>
         <h3>Sekolah daftar gratis</h3>
         <p>Sekolah membuat akun dan menambahkan siswa, guru, serta kelas dalam hitungan menit.</p>
       </div>
       <div class="step">
+        <div class="step-graphic"><svg width="120" height="52" viewBox="0 0 120 52" fill="none" stroke="#E5664A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="6" width="26" height="44" rx="5"/><path d="M21 10h12" stroke-width="2"/><rect x="48" y="14" width="24" height="24" rx="3"/><path d="M52 18h4v4h-4zM60 18h4v4h-4zM52 26h4v4h-4zM60 26h4v4h-4z" stroke-width="1.8"/><path d="M76 26h14" stroke-dasharray="2 4"/><path d="M40 26h4" stroke-dasharray="2 4"/><path d="M96 20l6 6-6 6" stroke-width="2"/></svg></div>
         <div class="n">2</div>
         <h3>Guru input & unggah</h3>
         <p>Guru mencatat aktivitas dan mengunggah momen dengan sekali ketuk.</p>
       </div>
       <div class="step">
+        <div class="step-graphic"><svg width="120" height="52" viewBox="0 0 120 52" fill="none" stroke="#A87A2A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="10" width="24" height="38" rx="5"/><rect x="88" y="10" width="24" height="38" rx="5"/><path d="M32 26c6-8 14-8 20 0s14 8 20 0" stroke="#E9A83A"/><circle cx="60" cy="26" r="3" fill="#E9A83A" stroke="none"/><path d="M14 16h4M94 16h4" stroke-width="2"/></svg></div>
         <div class="n">3</div>
         <h3>Orang tua pantau & bayar</h3>
         <p>Orang tua menerima laporan, menikmati momen, dan membayar SPP dari aplikasi.</p>
