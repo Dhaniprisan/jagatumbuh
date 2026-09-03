@@ -276,6 +276,76 @@
     * { transition-duration: .001ms !important; }
   }
 
+  /* Hero collage */
+  .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; min-height: 420px; }
+  .hero-visual .phone { width: 340px; position: relative; z-index: 2; }
+  .collage-img {
+    position: absolute; width: 160px; height: 160px; object-fit: cover;
+    border-radius: 16px; box-shadow: 0 12px 32px rgba(46,42,38,.14);
+    z-index: 3;
+  }
+  .collage-a { top: 20px; right: 30px; transform: rotate(3deg); }
+  .collage-b { bottom: 20px; left: 30px; transform: rotate(-3deg); }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--muted); margin-top: 14px;
+    background: var(--surface); border: 1px solid var(--line); padding: 6px 12px; border-radius: 999px;
+  }
+
+  /* Proof strip */
+  .proof-strip { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 36px 0; }
+  .proof-grid { display: flex; align-items: stretch; justify-content: center; flex-wrap: wrap; gap: 0; }
+  .proof-item {
+    flex: 1 1 180px; min-width: 160px; padding: 12px 24px 12px 24px;
+    border-left: 1px solid var(--line);
+  }
+  .proof-item:first-child { border-left: none; }
+  .proof-item .num { font-size: 26px; font-weight: 800; color: var(--green-dark); line-height: 1.2; }
+  .proof-item .label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* Vision alternate rows */
+  .vision { text-align: center; padding: 56px 0; }
+  .vision .section-head { margin-left: auto; margin-right: auto; }
+  .vision-row {
+    display: flex; align-items: center; gap: 48px; padding: 48px 0; border-bottom: 2px dashed var(--line);
+  }
+  .vision-row:last-of-type { border-bottom: none; }
+  .vision-row.reverse { flex-direction: row-reverse; }
+  .vision-visual { flex: 0 0 240px; display: flex; justify-content: center; }
+  .vision-text { flex: 1; text-align: left; }
+  .vision-row.reverse .vision-text { text-align: right; }
+  .vision-text h3 { font-size: clamp(22px, 2.8vw, 30px); font-weight: 800; margin-bottom: 10px; }
+  .vision-text p { color: var(--muted); font-size: 16px; max-width: 48ch; }
+  .vision-row.reverse .vision-text p { margin-left: auto; }
+  .vision-shot {
+    width: 240px; height: auto; border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(46,42,38,.12); transform: rotate(-2deg);
+  }
+  .admin-card {
+    width: 240px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+    overflow: hidden; box-shadow: 0 12px 32px rgba(46,42,38,.12); transform: rotate(-2deg);
+  }
+  .admin-header { background: var(--green); color: #fff; padding: 14px 16px; font-weight: 700; font-size: 14px; }
+  .admin-row { display: flex; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .admin-row:last-child { border-bottom: none; }
+
+  /* Testimonials */
+  .testimonials { background: var(--cream); border-top: 1px solid var(--line); }
+  .testimonials .section-head { text-align: center; margin-left: auto; margin-right: auto; }
+  .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .testimonial-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .testimonial-card blockquote { font-style: italic; font-size: 15px; color: var(--ink); line-height: 1.55; margin-bottom: 18px; }
+  .testimonial-footer { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+  .testimonial-footer img {
+    width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex: none;
+  }
+  .testimonial-footer .name { font-size: 14px; font-weight: 700; }
+  .testimonial-footer .role { font-size: 12px; color: var(--muted); }
+
   /* mobile */
   @media (max-width: 900px) {
     .hero-grid, .problem-grid, .feature, .pricing-grid { grid-template-columns: 1fr; }
@@ -286,6 +356,17 @@
     .phone { width: 280px; }
     .pricing { padding: 40px 24px; }
     .step + .step { border-left: none; border-top: 2px dashed var(--line); }
+    .vision-row, .vision-row.reverse { flex-direction: column; text-align: center; }
+    .vision-row.reverse .vision-text, .vision-text { text-align: center; }
+    .vision-row.reverse .vision-text p { margin-left: 0; }
+    .vision-visual { flex: 0 0 auto; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-visual { min-height: auto; padding: 20px 0; }
+    .hero-visual .phone { width: 260px; }
+    .collage-img { width: 80px; height: 80px; }
+    .testimonial-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -320,16 +401,19 @@
         <a href="produk-select.html" class="btn btn-primary">Lihat Prototype</a>
         <a href="#cara-kerja" class="btn btn-ghost">Cara Kerja</a>
       </div>
+      <div class="hero-badge">⭐ 4.9 · 1.200+ ulasan</div>
       <p class="hero-note">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Data anak aman & terenkripsi, hanya dibagikan ke wali terhubung.
       </p>
     </div>
-    <div class="phone-wrap reveal">
+    <div class="hero-visual reveal">
+      <img class="collage-img collage-a" src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=500&q=80" alt="Anak bermain" width="160" height="160" loading="lazy" style="object-fit:cover">
+      <img class="collage-img collage-b" src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=500&q=80" alt="Anak belajar" width="160" height="160" loading="lazy" style="object-fit:cover">
       <div class="phone">
         <div class="notch"></div>
         <div class="phone-screen-header">
-          <img src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=400&q=80" alt="Anak belajar di kelas" width="32" height="32" loading="eager" style="object-fit:cover">
+          <img src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=400&q=80" alt="Anak belajar di kelas" width="32" height="32" loading="lazy" style="object-fit:cover">
           <div>
             <div class="title">JagaTumbuh</div>
             <div class="sub">SD Kenanga · Kelas 2A</div>
@@ -356,6 +440,26 @@
             <div class="value">IPA 85 · B. Indonesia 88</div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<section class="proof-strip">
+  <div class="container">
+    <div class="proof-grid">
+      <div class="proof-item">
+        <div class="num">120+</div>
+        <div class="label">Sekolah mitra</div>
+      </div>
+      <div class="proof-item">
+        <div class="num">3.500+</div>
+        <div class="label">Anak terpantau</div>
+      </div>
+      <div class="proof-item">
+        <div class="num">98%</div>
+        <div class="label">Orang tua puas</div>
       </div>
     </div>
   </div>
@@ -567,16 +671,85 @@
 <!-- VISION -->
 <section class="vision">
   <div class="container">
-    <div class="section-head" style="margin: 0 auto 0;">
+    <div class="section-head">
       <div class="kicker">Perjalanan Kami</div>
       <h2>Dimulai dari yang paling dekat.</h2>
     </div>
-    <div class="path">
-      <span class="node now">Daycare · KB · TK</span>
-      <span class="arrow">→</span>
-      <span class="node">Sekolah Dasar</span>
-      <span class="arrow">→</span>
-      <span class="node">Layanan Kesehatan</span>
+
+    <div class="vision-row">
+      <div class="vision-visual">
+        <img class="vision-shot" src="assets/shot-parent.png" alt="Tampilan aplikasi orang tua" width="240" height="426" loading="lazy" style="object-fit:cover">
+      </div>
+      <div class="vision-text">
+        <h3>Orang Tua</h3>
+        <p>Pantau aktivitas harian, lihat momen foto dan video, serta bayar SPP langsung dari satu aplikasi.</p>
+      </div>
+    </div>
+
+    <div class="vision-row reverse">
+      <div class="vision-visual">
+        <img class="vision-shot" src="assets/shot-guru.png" alt="Tampilan aplikasi guru" width="240" height="426" loading="lazy" style="object-fit:cover">
+      </div>
+      <div class="vision-text">
+        <h3>Guru / Wali Kelas</h3>
+        <p>Input laporan cepat, unggah momen kelas, dan komunikasi dengan orang tua jadi lebih terstruktur.</p>
+      </div>
+    </div>
+
+    <div class="vision-row">
+      <div class="vision-visual">
+        <div class="admin-card" role="img" aria-label="Mockup dashboard admin sekolah">
+          <div class="admin-header">Dashboard Sekolah</div>
+          <div class="admin-row"><span>Siswa</span><strong>142</strong></div>
+          <div class="admin-row"><span>Guru</span><strong>18</strong></div>
+          <div class="admin-row"><span>SPP Lunas</span><strong>96%</strong></div>
+        </div>
+      </div>
+      <div class="vision-text">
+        <h3>Admin Sekolah</h3>
+        <p>Kelola data master, tagihan SPP, dan laporan operasional secara terpusat tanpa spreadsheet rumit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-head">
+      <h2>Kata mereka</h2>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <blockquote>"Sekarang aku gak perlu nunggu di grup buat tau kabar Raka."</blockquote>
+        <div class="testimonial-footer">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80" alt="Bunda Sarah" width="44" height="44" loading="lazy" style="object-fit:cover">
+          <div>
+            <div class="name">Bunda Sarah</div>
+            <div class="role">Orang tua</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <blockquote>"Absen yang dulu 15 menit, sekarang 2 menit kelar."</blockquote>
+        <div class="testimonial-footer">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80" alt="Bu Sari" width="44" height="44" loading="lazy" style="object-fit:cover">
+          <div>
+            <div class="name">Bu Sari</div>
+            <div class="role">Wali kelas</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <blockquote>"Tagihan rapi, laporan otomatis. Waktu banyak kehemat."</blockquote>
+        <div class="testimonial-footer">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80" alt="Pak Budi" width="44" height="44" loading="lazy" style="object-fit:cover">
+          <div>
+            <div class="name">Pak Budi</div>
+            <div class="role">Kepala sekolah</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
