@@ -9,34 +9,81 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="app.css" />
 <style>
-  .att { background: var(--ink); color: #F5EFE7; border-radius: var(--radius); padding: 18px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
-  .att .n { font-size: 26px; font-weight: 800; }
-  .att .l { font-size: 12px; color: #CFC6BB; }
-  .att .ok { font-size: 12px; font-weight: 700; color: #B5D8B8; background: rgba(62,122,79,.25); padding: 4px 12px; border-radius: 999px; }
-  .roster { display: flex; flex-direction: column; gap: 10px; }
-  .child { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; }
-  .av { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 15px; }
+  /* Summary card */
+  .att {
+    background: var(--ink); color: #F5EFE7; border-radius: var(--radius);
+    padding: 16px 18px; margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .att .count { font-size: 26px; font-weight: 800; line-height: 1; }
+  .att .label { font-size: 12px; color: #CFC6BB; margin-top: 4px; }
+  .att .all-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 700; color: var(--green-dark);
+    background: var(--green-soft); border: none; border-radius: 999px;
+    padding: 8px 14px; cursor: pointer; transition: background .15s ease, transform .15s ease;
+  }
+  .att .all-btn:active { transform: scale(.96); }
+
+  /* Roster */
+  .roster { display: flex; flex-direction: column; gap: 12px; }
+
+  .child {
+    display: flex; flex-direction: column; gap: 12px;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius-sm); padding: 14px;
+  }
+
+  .child-row {
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .av {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 15px; flex-shrink: 0;
+  }
   .c1 { background: var(--coral-soft); color: var(--coral-dark); }
   .c2 { background: var(--green-soft); color: var(--green-dark); }
   .c3 { background: var(--gold-soft); color: var(--gold-dark); }
   .c4 { background: #E3EFF7; color: #3A7A9E; }
   .c5 { background: #EDEBF7; color: #5C5A8A; }
   .c6 { background: var(--sage-soft); color: var(--sage); }
-  .info { flex: 1; }
+
+  .info { flex: 1; min-width: 0; }
   .info b { font-size: 14px; font-weight: 700; }
   .info small { display: block; font-size: 11px; color: var(--muted); }
-  .st { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
-  .st.in { color: var(--green-dark); background: var(--green-soft); }
-  .st.izin { color: var(--coral-dark); background: var(--coral-soft); }
-  .st.tidak { color: var(--muted); background: var(--cream); }
-  .badge-row { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
-  .badge-row .toggle-btn { font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; border:none; background:var(--line); color:var(--muted); cursor:pointer; transition:.15s; }
-  .badge-row .toggle-btn:hover { transform:translateY(-1px); box-shadow:0 2px 4px rgba(46,42,38,.08); }
-  .badge-row .st { cursor:default; pointer-events:none; }
-  .badge-row .toggle-btn.in { background:var(--green-soft); color:var(--green-dark); }
-  .badge-row .toggle-btn.izin { background:var(--coral-soft); color:var(--coral-dark); }
-  .badge-row .toggle-btn.tidak { background:var(--cream); color:var(--muted); }
-  .go { font-size: 12px; font-weight: 700; color: var(--coral-dark); }
+  .info .photo-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 700; color: var(--green-dark);
+    background: var(--green-soft); padding: 2px 8px; border-radius: 999px;
+    margin-top: 4px;
+  }
+
+  .cam-btn {
+    width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line);
+    background: var(--surface); color: var(--ink); font-size: 15px;
+    display: grid; place-items: center; cursor: pointer; flex-shrink: 0;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .cam-btn.saved { background: var(--green-soft); border-color: var(--green); }
+
+  /* Attendance buttons */
+  .att-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+  }
+  .att-btn {
+    min-height: 40px; padding: 8px 6px;
+    font-family: inherit; font-size: 13px; font-weight: 700;
+    border: 1.5px solid var(--line); border-radius: var(--radius-sm);
+    background: var(--surface); color: var(--muted);
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+
+  .att-btn.hadir.active { background: var(--green-soft); border-color: var(--green); color: var(--green-dark); }
+  .att-btn.izin.active { background: var(--coral-soft); border-color: var(--coral); color: var(--coral-dark); }
+  .att-btn.sakit.active { background: var(--gold-soft); border-color: var(--gold); color: var(--gold-dark); }
 </style>
 </head>
 <body>
@@ -61,43 +108,122 @@
   <main class="content">
 
     <div class="att">
-      <div><div class="n" id="att-count">6/6</div><div class="l">anak hadir hari ini</div></div>
-      <span class="ok">Tap untuk ubah status</span>
+      <div>
+        <div class="count" id="att-count">4/6</div>
+        <div class="label">anak hadir hari ini</div>
+      </div>
+      <button class="all-btn" onclick="markAllHadir()">✓ Semua Hadir</button>
     </div>
 
-    <div class="section-label"><h2>Daftar anak</h2><span class="meta">ketuk untuk catat aktivitas</span></div>
+    <div class="section-label">
+      <h2>Absensi pagi</h2>
+      <span class="meta">ketuk status untuk mencatat kehadiran</span>
+    </div>
 
     <div class="roster">
-      <a class="child" href="guru-input.html">
-        <span class="av c1">A</span>
-        <div class="info"><b>Ara</b><small>2 tahun · sudah diinput</small></div>
-        <div class="badge-row"><button class="toggle-btn in" data-state="in" onclick="cycleAtt(this)">Hadir</button><a class="go" href="guru-input.html">Catat →</a></div>
-      </a>
-      <a class="child" href="guru-input.html">
-        <span class="av c2">B</span>
-        <div class="info"><b>Bima</b><small>2 tahun · belum diinput</span></div>
-        <div class="badge-row"><button class="toggle-btn in" data-state="in" onclick="cycleAtt(this)">Hadir</button><a class="go" href="guru-input.html">Catat →</a></div>
-      </a>
-      <a class="child" href="guru-input.html">
-        <span class="av c3">C</span>
-        <div class="info"><b>Caca</b><small>2,5 tahun · belum diinput</span></div>
-        <div class="badge-row"><button class="toggle-btn in" data-state="in" onclick="cycleAtt(this)">Hadir</button><a class="go" href="guru-input.html">Catat →</a></div>
-      </a>
-      <a class="child" href="guru-input.html">
-        <span class="av c4">D</span>
-        <div class="info"><b>Dara</b><small>2 tahun · belum diinput</span></div>
-        <div class="badge-row"><button class="toggle-btn in" data-state="in" onclick="cycleAtt(this)">Hadir</button><a class="go" href="guru-input.html">Catat →</a></div>
-      </a>
-      <a class="child" href="guru-input.html">
-        <span class="av c5">E</span>
-        <div class="info"><b>Elan</b><small>3 tahun · belum diinput</span></div>
-        <div class="badge-row"><button class="toggle-btn in" data-state="in" onclick="cycleAtt(this)">Hadir</button><a class="go" href="guru-input.html">Catat →</a></div>
-      </a>
-      <a class="child" href="guru-input.html">
-        <span class="av c6">F</span>
-        <div class="info"><b>Fara</b><small>2 tahun · izin</span></div>
-        <div class="badge-row"><button class="toggle-btn izin" data-state="izin" onclick="cycleAtt(this)">Izin</button><a class="go" href="guru-input.html">Catat →</a></div>
-      </a>
+
+      <div class="child" data-child="ara">
+        <div class="child-row">
+          <span class="av c1">A</span>
+          <div class="info">
+            <b>Ara</b>
+            <small>2 tahun</small>
+            <span class="photo-badge" style="display:none">📸 Foto tersimpan</span>
+          </div>
+          <button class="cam-btn" aria-label="Foto kedatangan" onclick="toggleFoto(this)">📷</button>
+        </div>
+        <div class="att-grid">
+          <button class="att-btn hadir" data-status="hadir" onclick="setAtt(this, 'hadir')">✅ Hadir</button>
+          <button class="att-btn izin" data-status="izin" onclick="setAtt(this, 'izin')">🏠 Izin</button>
+          <button class="att-btn sakit" data-status="sakit" onclick="setAtt(this, 'sakit')">🤒 Sakit</button>
+        </div>
+      </div>
+
+      <div class="child" data-child="bima">
+        <div class="child-row">
+          <span class="av c2">B</span>
+          <div class="info">
+            <b>Bima</b>
+            <small>2 tahun</small>
+            <span class="photo-badge" style="display:none">📸 Foto tersimpan</span>
+          </div>
+          <button class="cam-btn" aria-label="Foto kedatangan" onclick="toggleFoto(this)">📷</button>
+        </div>
+        <div class="att-grid">
+          <button class="att-btn hadir" data-status="hadir" onclick="setAtt(this, 'hadir')">✅ Hadir</button>
+          <button class="att-btn izin" data-status="izin" onclick="setAtt(this, 'izin')">🏠 Izin</button>
+          <button class="att-btn sakit" data-status="sakit" onclick="setAtt(this, 'sakit')">🤒 Sakit</button>
+        </div>
+      </div>
+
+      <div class="child" data-child="caca">
+        <div class="child-row">
+          <span class="av c3">C</span>
+          <div class="info">
+            <b>Caca</b>
+            <small>2,5 tahun</small>
+            <span class="photo-badge" style="display:none">📸 Foto tersimpan</span>
+          </div>
+          <button class="cam-btn" aria-label="Foto kedatangan" onclick="toggleFoto(this)">📷</button>
+        </div>
+        <div class="att-grid">
+          <button class="att-btn hadir" data-status="hadir" onclick="setAtt(this, 'hadir')">✅ Hadir</button>
+          <button class="att-btn izin" data-status="izin" onclick="setAtt(this, 'izin')">🏠 Izin</button>
+          <button class="att-btn sakit" data-status="sakit" onclick="setAtt(this, 'sakit')">🤒 Sakit</button>
+        </div>
+      </div>
+
+      <div class="child" data-child="dara">
+        <div class="child-row">
+          <span class="av c4">D</span>
+          <div class="info">
+            <b>Dara</b>
+            <small>2 tahun</small>
+            <span class="photo-badge" style="display:none">📸 Foto tersimpan</span>
+          </div>
+          <button class="cam-btn" aria-label="Foto kedatangan" onclick="toggleFoto(this)">📷</button>
+        </div>
+        <div class="att-grid">
+          <button class="att-btn hadir" data-status="hadir" onclick="setAtt(this, 'hadir')">✅ Hadir</button>
+          <button class="att-btn izin" data-status="izin" onclick="setAtt(this, 'izin')">🏠 Izin</button>
+          <button class="att-btn sakit" data-status="sakit" onclick="setAtt(this, 'sakit')">🤒 Sakit</button>
+        </div>
+      </div>
+
+      <div class="child" data-child="elan">
+        <div class="child-row">
+          <span class="av c5">E</span>
+          <div class="info">
+            <b>Elan</b>
+            <small>3 tahun</small>
+            <span class="photo-badge" style="display:none">📸 Foto tersimpan</span>
+          </div>
+          <button class="cam-btn" aria-label="Foto kedatangan" onclick="toggleFoto(this)">📷</button>
+        </div>
+        <div class="att-grid">
+          <button class="att-btn hadir" data-status="hadir" onclick="setAtt(this, 'hadir')">✅ Hadir</button>
+          <button class="att-btn izin" data-status="izin" onclick="setAtt(this, 'izin')">🏠 Izin</button>
+          <button class="att-btn sakit" data-status="sakit" onclick="setAtt(this, 'sakit')">🤒 Sakit</button>
+        </div>
+      </div>
+
+      <div class="child" data-child="fara">
+        <div class="child-row">
+          <span class="av c6">F</span>
+          <div class="info">
+            <b>Fara</b>
+            <small>2 tahun</small>
+            <span class="photo-badge" style="display:none">📸 Foto tersimpan</span>
+          </div>
+          <button class="cam-btn" aria-label="Foto kedatangan" onclick="toggleFoto(this)">📷</button>
+        </div>
+        <div class="att-grid">
+          <button class="att-btn hadir" data-status="hadir" onclick="setAtt(this, 'hadir')">✅ Hadir</button>
+          <button class="att-btn izin" data-status="izin" onclick="setAtt(this, 'izin')">🏠 Izin</button>
+          <button class="att-btn sakit" data-status="sakit" onclick="setAtt(this, 'sakit')">🤒 Sakit</button>
+        </div>
+      </div>
+
     </div>
 
   </main>
@@ -111,5 +237,56 @@
 
 </div>
 <script src="att.js"></script>
+<script>
+  const defaultState = { ara: 'hadir', bima: 'hadir', caca: '', dara: 'izin', elan: 'hadir', fara: 'sakit' };
+  const stored = (() => { try { return JSON.parse(localStorage.getItem('jg_att_state') || '{}'); } catch(e) { return {}; } })();
+  const state = { ...defaultState, ...stored };
+
+  function saveState() { try { localStorage.setItem('jg_att_state', JSON.stringify(state)); } catch(e) {} }
+
+  function updateSummary() {
+    const hadir = Object.values(state).filter(s => s === 'hadir').length;
+    document.getElementById('att-count').textContent = hadir + '/6';
+  }
+
+  function applyState() {
+    document.querySelectorAll('.child').forEach(child => {
+      const key = child.dataset.child;
+      const status = state[key] || '';
+      child.querySelectorAll('.att-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.status === status);
+      });
+    });
+    updateSummary();
+  }
+
+  function setAtt(el, status) {
+    const child = el.closest('.child');
+    const key = child.dataset.child;
+    state[key] = status;
+    child.querySelectorAll('.att-btn').forEach(btn => btn.classList.remove('active'));
+    el.classList.add('active');
+    saveState();
+    updateSummary();
+  }
+
+  function markAllHadir() {
+    document.querySelectorAll('.child').forEach(child => {
+      const key = child.dataset.child;
+      state[key] = 'hadir';
+      child.querySelectorAll('.att-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.status === 'hadir'));
+    });
+    saveState();
+    updateSummary();
+  }
+
+  function toggleFoto(btn) {
+    const saved = btn.classList.toggle('saved');
+    const badge = btn.closest('.child').querySelector('.photo-badge');
+    if (badge) badge.style.display = saved ? 'inline-flex' : 'none';
+  }
+
+  applyState();
+</script>
 </body>
 </html>
