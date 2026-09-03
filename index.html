@@ -109,30 +109,28 @@
     padding: 18px 16px 24px;
   }
   .phone .notch { width: 120px; height: 26px; background: var(--cream); border-radius: 999px; margin: 0 auto 14px; }
-  .phone-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-  .phone-header .hi { font-weight: 700; font-size: 15px; }
-  .phone-header .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--coral-soft); display: grid; place-items: center; color: var(--coral-dark); font-weight: 700; font-size: 14px; }
-  .phone .kid-card {
-    background: linear-gradient(135deg, #fff, var(--coral-soft));
-    border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 16px; margin-bottom: 12px;
+  .phone-screen-header {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--green); color: #fff;
+    border-radius: 14px; padding: 10px 12px;
+    margin-bottom: 12px;
   }
-  .kid-card .row { display: flex; align-items: center; justify-content: space-between; }
-  .kid-card .name { font-weight: 700; font-size: 16px; }
-  .kid-card .status { font-size: 12px; font-weight: 600; color: var(--sage); background: var(--sage-soft); padding: 3px 10px; border-radius: 999px; }
-  .kid-card .mood { margin-top: 10px; font-size: 13px; color: var(--muted); }
-  .log { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-  .log .cell { background: var(--cream); border-radius: var(--radius-sm); padding: 10px 12px; }
-  .log .cell .k { font-size: 11px; color: var(--muted); }
-  .log .cell .v { font-size: 14px; font-weight: 700; margin-top: 2px; }
-  .phone .photo {
-    border-radius: var(--radius-sm); height: 110px; overflow: hidden; position: relative;
-    background: linear-gradient(135deg, #FBE9E2, #F3D5C8);
-    display: grid; place-items: center; color: var(--coral-dark);
+  .phone-screen-header img {
+    width: 32px; height: 32px; border-radius: 50%;
+    object-fit: cover; flex: none; background: rgba(255,255,255,.2);
   }
-  .phone .photo span { font-size: 26px; }
-  .phone .foot { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--muted); }
-  .phone .foot .tag { color: var(--coral); font-weight: 600; }
+  .phone-screen-header .title { font-weight: 700; font-size: 14px; line-height: 1.2; }
+  .phone-screen-header .sub { font-size: 11px; opacity: .85; }
+  .mini-card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; padding: 10px 12px; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .mini-card:last-child { margin-bottom: 0; }
+  .mini-card .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .mini-card .text { flex: 1; }
+  .mini-card .label { font-size: 11px; color: var(--muted); }
+  .mini-card .value { font-size: 13px; font-weight: 700; }
 
   /* ---------- Section shared ---------- */
   section { padding: 80px 0; }
@@ -144,9 +142,16 @@
   /* problem */
   .problem { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .problem-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; background: var(--cream); }
+  .problem-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; background: var(--cream); text-align: center; }
   .problem-card.dark { background: var(--ink); color: #F5EFE7; border-color: var(--ink); }
-  .problem-card .tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; margin-bottom: 18px; }
+  .problem-card .icon {
+    width: 64px; height: 64px; margin: 0 auto 18px;
+    display: grid; place-items: center;
+    border-radius: 50%; background: rgba(255,255,255,.7);
+  }
+  .problem-card.dark .icon { background: rgba(255,255,255,.08); }
+  .problem-card .icon svg { width: 40px; height: 40px; }
+  .problem-card .tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; margin-bottom: 14px; }
   .problem-card.light .tag { background: var(--coral-soft); color: var(--coral-dark); }
   .problem-card.dark .tag { background: rgba(255,255,255,.12); color: #fff; }
   .problem-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
@@ -156,20 +161,23 @@
   /* roles */
   .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   .role {
-    border: 1px solid var(--line); border-radius: var(--radius); padding: 30px;
-    background: var(--surface); transition: transform .2s ease, box-shadow .2s ease;
+    border: 1px solid var(--line); border-radius: var(--radius);
+    background: var(--surface); overflow: hidden;
+    transition: transform .2s ease, box-shadow .2s ease;
   }
   .role:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
-  .role .icon { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 18px; }
+  .role-photo { width: 100%; height: 140px; object-fit: cover; display: block; }
+  .role-body { padding: 24px 24px 28px; }
+  .role .icon { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 14px; }
   .role .icon svg { width: 22px; height: 22px; }
   .role.ortu .icon { background: var(--coral-soft); color: var(--coral-dark); }
   .role.guru .icon { background: var(--sage-soft); color: var(--sage); }
   .role.sekolah .icon { background: var(--gold-soft); color: var(--gold-dark); }
-  .role h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .role h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
   .role p { font-size: 14px; color: var(--muted); }
-  .role ul { list-style: none; margin-top: 16px; }
+  .role ul { list-style: none; margin-top: 14px; }
   .role li { font-size: 14px; padding: 5px 0; display: flex; gap: 9px; align-items: flex-start; }
-  .role li::before { content: ""; width: 16px; height: 16px; flex: none; margin-top: 3px; background: currentColor; opacity: .85; border-radius: 50%; -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>') center/contain no-repeat; mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>') center/contain no-repeat; }
+  .role li svg { width: 18px; height: 18px; flex: none; margin-top: 1px; }
   .role.ortu li { color: var(--coral-dark); }
   .role.guru li { color: var(--sage); }
   .role.sekolah li { color: var(--gold-dark); }
@@ -201,7 +209,8 @@
 
   /* steps */
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  .step { position: relative; padding: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .step { position: relative; padding: 28px 28px 28px 42px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .step + .step { border-left: 2px dashed var(--line); }
   .step .n { width: 36px; height: 36px; border-radius: 50%; background: var(--green); color: #fff; display: grid; place-items: center; font-weight: 700; margin-bottom: 18px; }
   .step h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
   .step p { font-size: 14px; color: var(--muted); }
@@ -229,10 +238,28 @@
   .vision .arrow { color: var(--muted); }
 
   /* final CTA */
-  .cta-final { text-align: center; padding: 72px 0 96px; }
-  .cta-final h2 { font-size: clamp(30px, 4.2vw, 46px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.12; margin-bottom: 18px; }
-  .cta-final p { color: var(--muted); font-size: 17px; margin-bottom: 32px; }
-  .cta-final .hero-cta { justify-content: center; }
+  .cta-final { padding: 72px 0 96px; }
+  .cta-card {
+    position: relative; overflow: hidden;
+    border-radius: 24px; text-align: center; color: #fff;
+    padding: 72px 32px; min-height: 360px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .cta-card img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 0;
+  }
+  .cta-card::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(46,42,38,.72), rgba(62,122,79,.62));
+    z-index: 1;
+  }
+  .cta-card .cta-content { position: relative; z-index: 2; }
+  .cta-card h2 { font-size: clamp(30px, 4.2vw, 46px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.12; margin-bottom: 18px; }
+  .cta-card p { font-size: 17px; margin-bottom: 32px; opacity: .92; }
+  .cta-card .hero-cta { justify-content: center; }
+  .cta-card .btn-primary { background: #fff; color: var(--green); }
+  .cta-card .btn-primary:hover { background: var(--cream); }
 
   footer { border-top: 1px solid var(--line); padding: 40px 0 48px; }
   .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
@@ -258,6 +285,7 @@
     .hero { padding: 48px 0 56px; }
     .phone { width: 280px; }
     .pricing { padding: 40px 24px; }
+    .step + .step { border-left: none; border-top: 2px dashed var(--line); }
   }
 </style>
 </head>
@@ -294,33 +322,39 @@
       </div>
       <p class="hero-note">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Data anak aman &amp; terenkripsi, hanya dibagikan ke wali terhubung.
+        Data anak aman & terenkripsi, hanya dibagikan ke wali terhubung.
       </p>
     </div>
     <div class="phone-wrap reveal">
       <div class="phone">
         <div class="notch"></div>
-        <div class="phone-header">
-          <span class="hi">Selamat siang, Bunda</span>
-          <span class="avatar">A</span>
-        </div>
-        <div class="kid-card">
-          <div class="row">
-            <span class="name">Ara · 2 tahun</span>
-            <span class="status">Di sekolah</span>
+        <div class="phone-screen-header">
+          <img src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=400&q=80" alt="Anak belajar di kelas" width="32" height="32" loading="eager" style="object-fit:cover">
+          <div>
+            <div class="title">JagaTumbuh</div>
+            <div class="sub">SD Kenanga · Kelas 2A</div>
           </div>
-          <div class="mood">Mood hari ini ceria &amp; aktif</div>
         </div>
-        <div class="log">
-          <div class="cell"><div class="k">Makan</div><div class="v">Bubur 🍚</div></div>
-          <div class="cell"><div class="k">Tidur</div><div class="v">1,5 jam</div></div>
-          <div class="cell"><div class="k">Toilet</div><div class="v">✓ 3x</div></div>
-          <div class="cell"><div class="k">Mood</div><div class="v">Ceria</div></div>
+        <div class="mini-card">
+          <span class="dot" style="background:var(--sage)"></span>
+          <div class="text">
+            <div class="label">Absensi</div>
+            <div class="value">Raka hadir 06.55</div>
+          </div>
         </div>
-        <div class="photo"><span>Momen hari ini</span></div>
-        <div class="foot">
-          <span>Kurva BB: normal</span>
-          <span class="tag">+2 foto baru</span>
+        <div class="mini-card">
+          <span class="dot" style="background:var(--coral)"></span>
+          <div class="text">
+            <div class="label">Tugas</div>
+            <div class="value">PR Matematika besok</div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <span class="dot" style="background:var(--gold)"></span>
+          <div class="text">
+            <div class="label">Nilai terbaru</div>
+            <div class="value">IPA 85 · B. Indonesia 88</div>
+          </div>
         </div>
       </div>
     </div>
@@ -336,11 +370,17 @@
     </div>
     <div class="problem-grid">
       <div class="problem-card light">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
         <span class="tag">Untuk Orang Tua</span>
         <h3>Cemas, dan momen terlewat.</h3>
         <p>Tidak tahu kegiatan anak di sekolah. Momen lucu dan berharga hilang begitu saja. Informasi tersebar di WhatsApp, kertas, dan buku — sulit diingat.</p>
       </div>
       <div class="problem-card dark">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F0B7A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+        </div>
         <span class="tag">Untuk Sekolah</span>
         <h3>Beban yang berulang.</h3>
         <p>Menjawab pertanyaan yang sama dari banyak orang tua. Pencatatan manual memakan waktu dan rentan salah. Sulit menunjukkan nilai tambah.</p>
@@ -359,37 +399,46 @@
     </div>
     <div class="roles">
       <div class="role ortu">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-3.5-7-6.5-7-10a7 7 0 0 1 14 0c0 3.5-3 6.5-7 10z"/></svg></div>
-        <h3>Orang Tua</h3>
-        <p>Pantau anak setiap hari dari HP.</p>
-        <ul>
-          <li>Laporan harian real-time</li>
-          <li>Galeri momen foto &amp; video</li>
-          <li>Kurva pertumbuhan WHO</li>
-          <li>Bayar SPP langsung</li>
-        </ul>
+        <img class="role-photo" src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=600&q=80" alt="Orang tua mendampingi anak" width="600" height="140" loading="lazy" style="object-fit:cover">
+        <div class="role-body">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-3.5-7-6.5-7-10a7 7 0 0 1 14 0c0 3.5-3 6.5-7 10z"/></svg></div>
+          <h3>Orang Tua</h3>
+          <p>Pantau anak setiap hari dari HP.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.6a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>Laporan harian real-time</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galeri momen foto & video</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Kurva pertumbuhan WHO</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 11V5a4 4 0 0 0-8 0v6"/></svg>Bayar SPP langsung</li>
+          </ul>
+        </div>
       </div>
       <div class="role guru">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13v5c0 1.7 4 3 9 3s9-1.3 9-3v-5"/></svg></div>
-        <h3>Guru / Wali Kelas</h3>
-        <p>Input cepat, tanpa ribet.</p>
-        <ul>
-          <li>Catat aktivitas &lt; 30 detik</li>
-          <li>Unggah momen kelas</li>
-          <li>Catat tumbuh kembang</li>
-          <li>Chat dengan orang tua</li>
-        </ul>
+        <img class="role-photo" src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=600&q=80" alt="Guru mengajar di kelas" width="600" height="140" loading="lazy" style="object-fit:cover">
+        <div class="role-body">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13v5c0 1.7 4 3 9 3s9-1.3 9-3v-5"/></svg></div>
+          <h3>Guru / Wali Kelas</h3>
+          <p>Input cepat, tanpa ribet.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Catat aktivitas &lt; 30 detik</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Unggah momen kelas</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Catat tumbuh kembang</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.6a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>Chat dengan orang tua</li>
+          </ul>
+        </div>
       </div>
       <div class="role sekolah">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9 21v-6h6v6"/></svg></div>
-        <h3>Sekolah</h3>
-        <p>Operasional lebih ringan.</p>
-        <ul>
-          <li>Data master terpusat</li>
-          <li>Tagihan SPP otomatis</li>
-          <li>Laporan operasional</li>
-          <li>Papan pengumuman</li>
-        </ul>
+        <img class="role-photo" src="https://images.unsplash.com/photo-1567168544813-cc03465b4fa8?w=600&q=80" alt="Sekolah" width="600" height="140" loading="lazy" style="object-fit:cover">
+        <div class="role-body">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9 21v-6h6v6"/></svg></div>
+          <h3>Sekolah</h3>
+          <p>Operasional lebih ringan.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.5"/><polyline points="18 2 12 8 9 5 4 10"/><path d="M12 8v6"/></svg>Data master terpusat</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 11V5a4 4 0 0 0-8 0v6"/></svg>Tagihan SPP otomatis</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>Laporan operasional</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Papan pengumuman</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -478,12 +527,12 @@
       </div>
       <div class="step">
         <div class="n">2</div>
-        <h3>Guru input &amp; unggah</h3>
+        <h3>Guru input & unggah</h3>
         <p>Guru mencatat aktivitas dan mengunggah momen dengan sekali ketuk.</p>
       </div>
       <div class="step">
         <div class="n">3</div>
-        <h3>Orang tua pantau &amp; bayar</h3>
+        <h3>Orang tua pantau & bayar</h3>
         <p>Orang tua menerima laporan, menikmati momen, dan membayar SPP dari aplikasi.</p>
       </div>
     </div>
@@ -535,10 +584,15 @@
 <!-- FINAL CTA -->
 <section class="cta-final" id="cta">
   <div class="container">
-    <h2>Siap melihatnya lebih dekat?</h2>
-    <p>Jelajahi prototype JagaTumbuh — dari laporan harian sampai pembayaran SPP.</p>
-    <div class="hero-cta">
-      <a href="produk-select.html" class="btn btn-primary">Lihat Prototype</a>
+    <div class="cta-card reveal">
+      <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=1200&q=80" alt="Anak-anak bermain bersama" width="1200" height="400" loading="lazy" style="object-fit:cover">
+      <div class="cta-content">
+        <h2>Siap melihatnya lebih dekat?</h2>
+        <p>Jelajahi prototype JagaTumbuh — dari laporan harian sampai pembayaran SPP.</p>
+        <div class="hero-cta">
+          <a href="produk-select.html" class="btn btn-primary">Lihat Prototype</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
