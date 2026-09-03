@@ -80,7 +80,81 @@
   .btn-ghost:hover { border-color: var(--ink); }
 
   /* ---------- Hero ---------- */
-  .hero { padding: 72px 0 88px; }
+  .hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding: 72px 0 88px;
+  }
+  .hero > .container { position: relative; z-index: 1; }
+
+  .hero-blob,
+  .hero-dots,
+  .hero-sprinkle {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .hero-dots {
+    inset: 0;
+    z-index: 0;
+    background-image: radial-gradient(circle, rgba(46,42,38,.06) 1.5px, transparent 1.5px);
+    background-size: 22px 22px;
+  }
+
+  .hero-blob {
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  .hero-blob-green {
+    width: 480px;
+    height: 480px;
+        top: -90px;
+    right: -70px;
+    background: radial-gradient(closest-side, rgba(62,122,79,.22), transparent);
+  }
+
+  .hero-blob-coral {
+    width: 380px;
+    height: 380px;
+        top: 32%;
+    left: -70px;
+    background: radial-gradient(closest-side, rgba(229,102,74,.16), transparent);
+  }
+
+  .hero-blob-gold {
+    width: 420px;
+    height: 420px;
+        bottom: -100px;
+    right: 18%;
+    background: radial-gradient(closest-side, rgba(233,168,58,.18), transparent);
+  }
+
+  .hero-sprinkle {
+    z-index: 0;
+    font-size: 18px;
+    line-height: 1;
+    opacity: .5;
+  }
+
+  .sprinkle-1 { top: 16%; left: 7%; color: var(--green); }
+  .sprinkle-2 { top: 60%; right: 10%; color: var(--coral); }
+  .sprinkle-3 { bottom: 20%; left: 56%; color: var(--gold); font-size: 10px; }
+
+  /* Wavy divider */
+  .wave-divider {
+    display: block;
+    width: 100%;
+    height: 50px;
+    line-height: 0;
+    background: var(--cream);
+  }
+  .wave-divider svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
   .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
   .eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
@@ -348,6 +422,9 @@
 
   /* mobile */
   @media (max-width: 900px) {
+    .hero-blob-green,
+    .hero-blob-coral,
+    .hero-blob-gold { transform: scale(.7); }
     .hero-grid, .problem-grid, .feature, .pricing-grid { grid-template-columns: 1fr; }
     .feature:nth-child(even) .feature-visual { order: 0; }
     .roles, .steps { grid-template-columns: 1fr; }
@@ -363,6 +440,10 @@
   }
 
   @media (max-width: 768px) {
+    .hero-blob-green,
+    .hero-blob-coral,
+    .hero-blob-gold { transform: scale(.6); }
+    .hero-sprinkle { display: none; }
     .hero-visual { min-height: auto; padding: 20px 0; }
     .hero-visual .phone { width: 260px; }
     .collage-img { width: 80px; height: 80px; }
@@ -392,6 +473,13 @@
 
 <!-- HERO -->
 <section class="hero">
+  <span class="hero-blob hero-blob-green" aria-hidden="true"></span>
+  <span class="hero-blob hero-blob-coral" aria-hidden="true"></span>
+  <span class="hero-blob hero-blob-gold" aria-hidden="true"></span>
+  <span class="hero-dots" aria-hidden="true"></span>
+  <span class="hero-sprinkle sprinkle-1" aria-hidden="true">&#10022;</span>
+  <span class="hero-sprinkle sprinkle-2" aria-hidden="true">&#10022;</span>
+  <span class="hero-sprinkle sprinkle-3" aria-hidden="true">&#10022;</span>
   <div class="container hero-grid">
     <div>
       <span class="eyebrow"><span class="dot"></span> Untuk Daycare · KB · TK</span>
@@ -444,6 +532,13 @@
     </div>
   </div>
 </section>
+
+<!-- WAVY DIVIDER -->
+<div class="wave-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 50" preserveAspectRatio="none" fill="#FFFFFF">
+    <path d="M0,50 L0,15 C120,35 240,0 360,0 C480,0 600,35 720,35 C840,35 960,0 1080,0 C1200,0 1320,35 1440,15 L1440,50 Z" />
+  </svg>
+</div>
 
 <!-- PROOF STRIP -->
 <section class="proof-strip">
